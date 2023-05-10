@@ -1,0 +1,80 @@
+#container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: fixed;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    perspective: 1000px;
+}
+#inputFields {
+    width: 29vw;
+    height: 96vh;
+    margin: auto;
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+    background-color: white;
+    opacity: 0.7;
+}
+
+#pista {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("");
+    background-size: cover;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg);
+    transition: transform 0.5s ease;
+    border-style: groove;
+    border: deeppink;
+    border-width: 2px;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("");
+    background-size: cover;
+    filter: grayscale(100%);
+}
+
+.slider {
+    width: 30%;
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    width: 80px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+input[type="number"] {
+    width: 60px;
+    margin-left: 10px;
+}
+
+hr.solid {
+    border-top: 2px solid #4a4a4a;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#transformValue {
+    background-color: white;
+    opacity: 0.8;
+}
