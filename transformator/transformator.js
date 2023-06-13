@@ -86,126 +86,126 @@ setDefaultValue();
 // Az input mezők és slider-ek eseménykezelői
 rotateXInput.addEventListener('input', function() {
     rotateXSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 rotateYInput.addEventListener('input', function() {
     rotateYSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 rotateZInput.addEventListener('input', function() {
     rotateZSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for scaleX input
 scaleXInput.addEventListener('input', function() {
     scaleXSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for scaleY input
 scaleYInput.addEventListener('input', function() {
     scaleYSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for scaleZ input
 scaleZInput.addEventListener('input', function() {
     scaleZSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for translateX input
 translateXInput.addEventListener('input', function() {
     translateXSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for translateY input
 translateYInput.addEventListener('input', function() {
     translateYSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for skewX input
 skewXInput.addEventListener('input', function() {
     skewXSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 skewYInput.addEventListener('input', function() {
     skewYSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}px) translateY(${translateYInput.value}px) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 rotateXSlider.addEventListener('input', function() {
     rotateXInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 rotateYSlider.addEventListener('input', function() {
     rotateYInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 rotateZSlider.addEventListener('input', function() {
     rotateZInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 scaleXSlider.addEventListener('input', function() {
     scaleXInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 scaleYSlider.addEventListener('input', function() {
     scaleYInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 scaleZSlider.addEventListener('input', function() {
     scaleZInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 translateXSlider.addEventListener('input', function() {
     translateXInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 translateYSlider.addEventListener('input', function() {
     translateYInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 skewXSlider.addEventListener('input', function() {
     skewXInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 skewYSlider.addEventListener('input', function() {
     skewYInput.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}px) translateY(${translateYSlider.value}px) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
+    pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
