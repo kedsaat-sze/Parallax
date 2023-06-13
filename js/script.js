@@ -43,6 +43,7 @@ function createImage(scene, id, resource, transform, fromTime, animationTime){
     const animation = new KeyframeEffect(document.getElementById(`${scene}-${id}`),transformation, animationOptions);
     const animationPlayer = new Animation(animation);
     animationPlayer.play();
+    animationPlayer.pause();
     animationPlayers.push({animationPlayer: animationPlayer, elementId: `${scene}-${id}`});
     return;
 }
@@ -75,7 +76,7 @@ function animateFunc() {
     });
 }
 
-function animateFuncc() {
+function playOnDiv() {
   audio.paused ? audio.play() : audio.pause();
   const images = document.querySelectorAll(".animated-image");
   images.forEach(image => {
