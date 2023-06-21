@@ -1,22 +1,70 @@
-const backgroundBtn = document.getElementById("backgroundBtn");
-const pistaBtn = document.getElementById("pistaBtn");
-const backgroundImg = document.getElementById("background");
-const pistaImage = document.getElementById("pista");
+import { Component, OnInit } from '@angular/core';
 
-backgroundBtn.addEventListener("click", function() {
+@Component({
+  selector: 'app-transformator',
+  templateUrl: './transformator.component.html',
+  styleUrls: ['./transformator.component.scss']
+})
+export class TransformatorComponent implements OnInit {
+  rotateX = 0;
+  rotateY = 0;
+  rotateZ = 0;
+  scaleX = 1;
+  scaleY = 1;
+  scaleZ = 1;
+  translateX = 0;
+  translateY = 0;
+  skewX = 0;
+  skewY = 0;
+
+  backgroundElement: HTMLImageElement | null = document.getElementById("background") as HTMLImageElement;
+  pistaElement: HTMLImageElement | null = document.getElementById("pista") as HTMLImageElement;
+  transformValue: string = "-";
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.setDefaultValue();
+    this.pistaElement = document.getElementById("pista") as HTMLImageElement;
+    this.backgroundElement = document.getElementById("background") as HTMLImageElement;
+  }
+
+  selectPista(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.pistaElement!.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  selectBackground(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.backgroundElement!.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  /*sselectPista() {
   const input = document.createElement("input");
   input.type = "file";
   input.accept = "image/*";
   input.addEventListener("change", function() {
-    const file = this.files[0];
+    const file = this.files![0];
     const reader = new FileReader();
     reader.addEventListener("load", function() {
-      backgroundImg.src = reader.result;
+      this.backgroundImg.src = reader.result;
     });
     reader.readAsDataURL(file);
   });
   input.click();
-});
+}
 
 pistaBtn.addEventListener("click", function() {
   const input = document.createElement("input");
@@ -31,60 +79,31 @@ pistaBtn.addEventListener("click", function() {
     reader.readAsDataURL(file);
   });
   input.click();
-});
+});*/
 
-
-// Az input mezők és a slider-ek kiválasztása
-const rotateXInput = document.querySelector('#rotateXValue');
-const rotateYInput = document.querySelector('#rotateYValue');
-const rotateZInput = document.querySelector('#rotateZValue');
-const scaleXInput = document.querySelector('#scaleXValue');
-const scaleYInput = document.querySelector('#scaleYValue');
-const scaleZInput = document.querySelector('#scaleZValue');
-const translateXInput = document.querySelector('#translateXValue');
-const translateYInput = document.querySelector('#translateYValue');
-const skewXInput = document.querySelector('#skewXValue');
-const skewYInput = document.querySelector('#skewYValue');
-
-const rotateXSlider = document.querySelector('#rotateX');
-const rotateYSlider = document.querySelector('#rotateY');
-const rotateZSlider = document.querySelector('#rotateZ');
-const scaleXSlider = document.querySelector('#scaleX');
-const scaleYSlider = document.querySelector('#scaleY');
-const scaleZSlider = document.querySelector('#scaleZ');
-const translateXSlider = document.querySelector('#translateX');
-const translateYSlider = document.querySelector('#translateY');
-const skewXSlider = document.querySelector('#skewX');
-const skewYSlider = document.querySelector('#skewY');
-
-
-function setDefaultValue() {
-// Az input mezők értékeinek beállítása a kezdőértékekre
-rotateXInput.value = 0;
-rotateYInput.value = 0;
-rotateZInput.value = 0;
-scaleXInput.value = 1;
-scaleYInput.value = 1;
-scaleZInput.value = 1;
-translateXInput.value = 0;
-translateYInput.value = 0;
-skewXInput.value = 0;
-skewYInput.value = 0;
-rotateXSlider.value = 0;
-rotateYSlider.value = 0;
-rotateZSlider.value = 0;
-scaleXSlider.value = 1;
-scaleYSlider.value = 1;
-scaleZSlider.value = 1;
-translateXSlider.value = 0;
-translateYSlider.value = 0;
-skewXSlider.value = 0;
-skewYSlider.value = 0;
+setDefaultValue() {
+  // Az input mezők értékeinek beállítása a kezdőértékekre
+  this.rotateX = 0;
+  this.rotateY = 0;
+  this.rotateZ = 0;
+  this.scaleX = 1;
+  this.scaleY = 1;
+  this.scaleZ = 1;
+  this.translateX = 0;
+  this.translateY = 0;
+  this.skewX = 0;
+  this.skewY = 0;
 }
 
-setDefaultValue();
+transformGenerate() {
+  // A transform tulajdonság értékének generálása
+  console.log("transformGenerate");
+  this.pistaElement!.style.transform = `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg) scaleX(${this.scaleX}) scaleY(${this.scaleY}) scaleZ(${this.scaleZ}) translateX(${this.translateX}%) translateY(${this.translateY}%) skewX(${this.skewX}deg) skewY(${this.skewY}deg)`;
+    this.transformValue = `transform: ${this.pistaElement!.style.transform}`;
+}
+/*
 // Az input mezők és slider-ek eseménykezelői
-rotateXInput.addEventListener('input', function() {
+this.rotateX.addEventListener('input', function() {
     rotateXSlider.value = this.value;
     pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
@@ -102,11 +121,10 @@ rotateZInput.addEventListener('input', function() {
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
-// Event listener for scaleX input
-scaleXInput.addEventListener('input', function() {
-    scaleXSlider.value = this.value;
-    pistaImage.style.transform = `rotateX(${rotateXInput.value}deg) rotateY(${rotateYInput.value}deg) rotateZ(${rotateZInput.value}deg) scaleX(${scaleXInput.value}) scaleY(${scaleYInput.value}) scaleZ(${scaleZInput.value}) translateX(${translateXInput.value}%) translateY(${translateYInput.value}%) skewX(${skewXInput.value}deg) skewY(${skewYInput.value}deg)`;
-    transformValue.textContent = `transform: ${pistaImage.style.transform}`;
+sscaleXInput.addEventListener('input', () => {
+  this.scaleXValue = Number(scaleXInput.value);
+  pistaImage.style.transform = `rotateX(${this.rotateXValue}deg) rotateY(${this.rotateYValue}deg) rotateZ(${this.rotateZValue}deg) scaleX(${this.scaleXValue}) scaleY(${this.scaleYValue}) scaleZ(${this.scaleZValue}) translateX(${this.translateXValue}%) translateY(${this.translateYValue}%) skewX(${this.skewXValue}deg) skewY(${this.skewYValue}deg)`;
+  transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
 
 // Event listener for scaleY input
@@ -209,3 +227,6 @@ skewYSlider.addEventListener('input', function() {
     pistaImage.style.transform = `rotateX(${rotateXSlider.value}deg) rotateY(${rotateYSlider.value}deg) rotateZ(${rotateZSlider.value}deg) scaleX(${scaleXSlider.value}) scaleY(${scaleYSlider.value}) scaleZ(${scaleZSlider.value}) translateX(${translateXSlider.value}%) translateY(${translateYSlider.value}%) skewX(${skewXSlider.value}deg) skewY(${skewYSlider.value}deg)`;
     transformValue.textContent = `transform: ${pistaImage.style.transform}`;
 });
+*/
+
+}

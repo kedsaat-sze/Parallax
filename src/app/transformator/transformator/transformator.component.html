@@ -1,0 +1,67 @@
+
+<div>
+    <div id="inputFields">
+        <label>Rotate X:</label>
+        <input type="number" name="rotateXValue" [(ngModel)]="rotateX" min="-60" max="60" step="0.01" #rotate_x_value=ngModel (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="rotateX" min="-60" max="60" step="0.01" class="slider" #rotate_x=ngModel [(ngModel)]="rotateX" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Rotate Y:</label>
+        <input type="number" name="rotateYValue" min="-60" max="60" step="0.01" #rotate_y_value=ngModel [(ngModel)]="rotateY" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="rotateY" min="-60" max="60" step="0.01" class="slider" #rotate_y=ngModel [(ngModel)]="rotateY" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Rotate Z:</label>
+        <input type="number" name="rotateZValue" min="-60" max="60" step="0.01" #rotate_z_value=ngModel [(ngModel)]="rotateZ" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="rotateZ" min="-60" max="60" step="0.01" class="slider" #rotate_z=ngModel [(ngModel)]="rotateZ" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Scale X:</label>
+        <input type="number" name="scaleXValue" value="1" step="0.001" min="0" max="2" #scale_x_value=ngModel [(ngModel)]="scaleX" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="scaleX" min="0" max="2" step="0.001" value="1" #scale_x=ngModel [(ngModel)]="scaleX" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Scale Y:</label>
+        <input type="number" name="scaleYValue" value="1" step="0.001" min="0" max="2" #scale_y_value=ngModel [(ngModel)]="scaleY" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="scaleY" min="0" max="2" step="0.001" value="1" #scale_y=ngModel [(ngModel)]="scaleY" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Scale Z:</label>
+        <input type="number" name="scaleZValue" value="1" step="0.001" min="0" max="2" #scale_z_value=ngModel [(ngModel)]="scaleZ" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="scaleZ" min="0" max="2" step="0.001" value="1" #scale_z=ngModel [(ngModel)]="scaleZ" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Translate X:</label>
+        <input type="number" name="translateXValue" value="0" step="0.01" min="-100" max="100" #translate_x_value=ngModel [(ngModel)]="translateX" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="translateX" min="-100" max="100" step="0.01" value="0" #translate_x=ngModel [(ngModel)]="translateX" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label>Translate Y:</label>
+        <input type="number" name="translateYValue" value="0" step="0.01" min="-100" max="100" #translate_y_value=ngModel [(ngModel)]="translateY" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="translateY" min="-100" max="100" step="0.01" value="0" #translate_y=ngModel [(ngModel)]="translateY" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label for="skewX">Skew X:</label>
+        <input type="number" name="skewXValue" value="0" step="0.01" min="-35" max="35" #skew_x_value=ngModel [(ngModel)]="skewX" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="skewX" min="-35" max="35" step="0.01" value="0" #skew_x=ngModel [(ngModel)]="skewX" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <label for="skewY">Skew Y:</label>
+        <input type="number" name="skewYValue" value="0" step="0.01" min="-35" #skew_y_value=ngModel max="35" [(ngModel)]="skewY" (ngModelChange)="transformGenerate()">
+        <br>
+        <input type="range" name="skewY" min="-35" max="35" step="0.01" value="0" #skew_y=ngModel [(ngModel)]="skewY" (ngModelChange)="transformGenerate()">
+        <hr class="solid">
+        <!--button id="pistaBtn" (change)="selectPista($event)">Select Screen</button>
+        <button id="backgroundBtn" (change)="selectBackground($event)">Select Background</button-->
+        <label for="pistaInput">Screen: <input type="file" id="pistaInput" (change)="selectPista($event)"></label>
+        
+        <label for="backgroundInput">BG: <input type="file" id="backgroundInput" (change)="selectBackground($event)"></label>
+        <hr class="solid">
+        <span id="transformValue">Transform: {{transformValue}} </span>
+    </div>
+    <div id="container">
+        <img src="" id="pista" style="border-style: groove;">
+        <img src="" id="background">
+    </div>
+</div>
+

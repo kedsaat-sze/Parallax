@@ -1,10 +1,9 @@
-
-svg, audio, button {
+audio, button {
     grid-row: 1;
     grid-column: 1;
 }
 
-.animated-image {
+:host::ng-deep .animated-image {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,23 +11,13 @@ svg, audio, button {
   height: 100%;
 }
 
-.paused{
+:host::ng-deep .paused{
   -webkit-animation-play-state:paused !important;
   -moz-animation-play-state:paused !important;
   -o-animation-play-state:paused !important;
   animation-play-state:paused !important;
 }
 #container {
-  width: 1200px;
-  height: 675px;
-  display: inline-block;
-  top: 0;
-  left: 0;
-  perspective: 1000px;
-  overflow: hidden;
-}
-
-#svg {
   width: 1200px;
   height: 675px;
   display: inline-block;
