@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TransformatorComponent } from "./transformator/transformator.component";
+import { PasswordSecurityComponent } from "./password-security/password-security.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: TransformatorComponent
+    component: PasswordSecurityComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TransformatorRoutingModule { }
+export class PasswordSecurityRoutingModule { }
