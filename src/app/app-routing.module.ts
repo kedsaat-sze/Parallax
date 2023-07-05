@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'transformator', loadChildren: () => import('./transformator/transformator.module').then(m => m.TransformatorModule) },
   { path: 'phishing', loadChildren: () => import('./phishing/phishing.module').then(m => m.PhishingModule) },
   { path: 'password_security', loadChildren: () => import('./password-security/password-security.module').then(m => m.PasswordSecurityModule) },
+  { path: 'mobile_device_security', loadChildren: () => import('./mobile-device-security/mobile-device-security.module').then(m => m.MobileDeviceSecurityModule) },
 ];
 
 @NgModule({
