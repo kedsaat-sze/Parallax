@@ -25,22 +25,10 @@ export class MobileDeviceSecurityComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
     this.audio.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
-    
-    
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`)
-    .subscribe(
-          (error) => 
-          {
-            console.log(error);
-            console.log("could not load audio source");
-          }
-    );
-    /*this.audio.addEventListener('error', (event)=> {
-      console.log(event);
+    this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      console.log("could not load audio source");
       this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
-      }, false);*/
+      }, false);
     this.http.get<any>('./assets/json/mobile_device_security.json').subscribe((data) => {
       data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
         movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
