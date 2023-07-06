@@ -3,7 +3,7 @@
         {
             "name": "scene1",
             "from_time": 0,
-            "animation_time": 8.5,
+            "animation_time": 10.2,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -124,8 +124,8 @@
         },
         {
             "name": "scene2",
-            "from_time": 8.5,
-            "animation_time": 10.5,
+            "from_time": 10.2,
+            "animation_time": 13.5,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -288,8 +288,8 @@
         },
         {
             "name": "scene3",
-            "from_time": 19,
-            "animation_time": 10.5,
+            "from_time": 23.7,
+            "animation_time": 9.2,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -463,8 +463,8 @@
         },
         {
             "name": "scene4",
-            "from_time": 29.5,
-            "animation_time": 23,
+            "from_time": 32.9,
+            "animation_time": 9.7,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -627,8 +627,8 @@
         },
         {
             "name": "scene5",
-            "from_time": 52.5,
-            "animation_time": 2.5,
+            "from_time": 42.6,
+            "animation_time": 5.6,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -791,8 +791,8 @@
         },
         {
             "name": "scene6",
-            "from_time": 54.5,
-            "animation_time": 10.5,
+            "from_time": 48.2,
+            "animation_time": 4.8,
             "animation_mode": "linear",
             "description": {
                 "background": {
@@ -966,8 +966,8 @@
         },
         {
             "name": "scene7",
-            "from_time": 65,
-            "animation_time": 16,
+            "from_time": 53,
+            "animation_time": 13.9,
             "animation_mode": "linear",
             "description": {
                 "background": {
