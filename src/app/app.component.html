@@ -2,19 +2,19 @@
 </style>
 
 <div class="toolbar">
-  <a aria-label="Home" class="menu-item" routerLink="/" title="Home">
+  <a aria-label="Home" class="menu-item" routerLink="/home" routerLinkActive="active" title="Home">
     Home
   </a>
-  <a aria-label="Phishing" class="menu-item" routerLink="/phishing" title="Phishing">
+  <a aria-label="Phishing" class="menu-item" [routerLink]="['/phishing']" routerLinkActive="active" title="Phishing">
     Phishing
   </a>
-  <a aria-label="Password" class="menu-item" routerLink="/password_security" title="Password security">
+  <a aria-label="Password" class="menu-item" routerLink="/password_security" routerLinkActive="active" title="Password security">
     Password security
   </a>
-  <a aria-label="Mobile device" class="menu-item" routerLink="/mobile_device_security" title="Mobile device security">
+  <a aria-label="Mobile device" class="menu-item" routerLink="/mobile_device_security" routerLinkActive="active" title="Mobile device security">
     Mobile device security
   </a>
-  <a aria-label="Transformator" class="menu-item" routerLink="/transformator" title="Transformator">
+  <a aria-label="Transformator" class="menu-item" routerLink="/transformator" routerLinkActive="active" title="Transformator">
     Transformator
   </a>
 </div>

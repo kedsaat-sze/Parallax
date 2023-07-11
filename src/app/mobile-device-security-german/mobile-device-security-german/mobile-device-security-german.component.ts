@@ -1,14 +1,14 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
 
 @Component({
-  selector: 'app-mobile-device-security',
-  templateUrl: './mobile-device-security.component.html',
-  styleUrls: ['./mobile-device-security.component.scss']
+  selector: 'app-mobile-device-security-german',
+  templateUrl: './mobile-device-security-german.component.html',
+  styleUrls: ['./mobile-device-security-german.component.scss']
 })
-export class MobileDeviceSecurityComponent implements OnInit {
+export class MobileDeviceSecurityGermanComponent {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audioSrc: string = "";
@@ -24,12 +24,12 @@ export class MobileDeviceSecurityComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security-german${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
+      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security-german.mp3`;
       }, false);
-    this.http.get<any>('./assets/json/mobile_device_security.json').subscribe((data) => {
+    this.http.get<any>('./assets/json/mobile_device_security-german.json').subscribe((data) => {
       data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
         movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
         let screenResource = "";
@@ -42,11 +42,6 @@ export class MobileDeviceSecurityComponent implements OnInit {
         movie.description.foreground != null ? this.createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s foreground is null`);
       });
     });
-  }
-
-  changeUrl() {
-    console.log("error");
-    this.audioSrc = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
   }
 
   createImage(scene: string, id: string, resource: string, transform: {
@@ -120,7 +115,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
     if (!flag) {
       this.audio!.paused ? this.audio!.play() : this.audio!.pause();
     } else {
-      this.router.navigate([`/mobile_device_security-german${this.name ? "/" + this.name : ""}`]);
+      this.router.navigate([`/mobile_device_security${this.name ? "/" + this.name : ""}`]);
     }
   }
 
@@ -128,5 +123,4 @@ export class MobileDeviceSecurityComponent implements OnInit {
     this.audio = document.getElementById("my-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
-
 }

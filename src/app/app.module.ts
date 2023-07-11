@@ -6,11 +6,13 @@ import { FormsModule } from "@angular/forms";
 import {MatCardModule} from '@angular/material/card';
 import { HomeComponent } from './home/home.component';
 import { AngularDeviceInformationService } from 'angular-device-information';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

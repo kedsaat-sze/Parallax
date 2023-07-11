@@ -4,7 +4,6 @@ import { MobileDeviceSecurityRoutingModule } from './mobile-device-security-rout
 import { MobileDeviceSecurityComponent } from './mobile-device-security/mobile-device-security.component';
 import { HttpClientModule } from "@angular/common/http";
 
-
 @NgModule({
   declarations: [
     MobileDeviceSecurityComponent

@@ -1,5 +1,27 @@
 <body style="margin: 0px; display: grid;">
-    <div id="container" (click)="playOnDiv()">
+    <div id="container" (click)="playOnDiv(false)">
+        <svg (click)="playOnDiv(true)" style="top: 60px; z-index: 1; position: relative;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" zoomAndPan="magnify" viewBox="0 0 30 30.000001" height="40" preserveAspectRatio="xMidYMid meet" version="1.0">
+            <defs>
+                <clipPath id="id1">
+                    <path d="M 2.613281 18 L 27.292969 18 L 27.292969 23.722656 L 2.613281 23.722656 Z M 2.613281 18 " clip-rule="nonzero"/>
+                </clipPath>
+                <clipPath id="id2">
+                    <path d="M 2.613281 11 L 27.292969 11 L 27.292969 19 L 2.613281 19 Z M 2.613281 11 " clip-rule="nonzero"/>
+                </clipPath>
+                <clipPath id="id3">
+                    <path d="M 2.613281 5.578125 L 27.292969 5.578125 L 27.292969 12 L 2.613281 12 Z M 2.613281 5.578125 " clip-rule="nonzero"/>
+                </clipPath>
+            </defs>
+            <g clip-path="url(#id1)">
+                <path fill="rgb(100%, 80.389404%, 1.959229%)" d="M 2.625 20.929688 C 2.625 22.472656 3.851562 23.722656 5.363281 23.722656 L 24.542969 23.722656 C 26.054688 23.722656 27.28125 22.472656 27.28125 20.929688 L 27.28125 18.136719 L 2.625 18.136719 Z M 2.625 20.929688 " fill-opacity="1" fill-rule="nonzero"/>
+            </g>
+            <g clip-path="url(#id2)">
+                <path fill="rgb(92.939758%, 12.159729%, 14.118958%)" d="M 2.625 11.855469 L 27.28125 11.855469 L 27.28125 18.136719 L 2.625 18.136719 Z M 2.625 11.855469 " fill-opacity="1" fill-rule="nonzero"/>
+            </g>
+            <g clip-path="url(#id3)">
+                <path fill="rgb(7.839966%, 7.839966%, 7.839966%)" d="M 24.542969 5.578125 L 5.363281 5.578125 C 3.851562 5.578125 2.625 6.828125 2.625 8.367188 L 2.625 11.855469 L 27.28125 11.855469 L 27.28125 8.367188 C 27.28125 6.828125 26.054688 5.578125 24.542969 5.578125 Z M 24.542969 5.578125 " fill-opacity="1" fill-rule="nonzero"/>
+            </g>
+        </svg>
     </div>
     <div id="audio-div">
         <audio id="my-audio" controls style=" bottom: 0px; width: 1200px; position: absolute;" (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata">
