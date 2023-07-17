@@ -20,6 +20,7 @@ export class MobileDeviceSecurityGermanComponent {
     if (this.name !== "") {
       localStorage.setItem("name", this.name);
     }
+    globalVariables.germanPage = true;
   }
 
   async ngOnInit(): Promise<void> {
@@ -111,12 +112,13 @@ export class MobileDeviceSecurityGermanComponent {
     });
   }
 
-  playOnDiv(flag?: boolean) {
-    if (!flag) {
-      this.audio!.paused ? this.audio!.play() : this.audio!.pause();
-    } else {
-      this.router.navigate([`/mobile_device_security${this.name ? "/" + this.name : ""}`]);
-    }
+  playOnDiv() {
+    this.audio!.paused ? this.audio!.play() : this.audio!.pause();
+  }
+
+  changeLanguage(event: Event) {
+    this.router.navigate([`/mobile_device_security${this.name ? "/" + this.name : ""}`]);
+    event.stopPropagation();
   }
 
   rateChange() {

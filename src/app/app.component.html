@@ -11,8 +11,11 @@
   <a aria-label="Password" class="menu-item" routerLink="/password_security" routerLinkActive="active" title="Password security">
     Password security
   </a>
-  <a aria-label="Mobile device" class="menu-item" routerLink="/mobile_device_security" routerLinkActive="active" title="Mobile device security">
+  <a *ngIf="!germanPage" aria-label="Mobile device security" class="menu-item" routerLink="/mobile_device_security" routerLinkActive="active" title="Mobile device security">
     Mobile device security
+  </a>
+  <a *ngIf="germanPage" aria-label="Sicherheit mobiler Geräte" class="menu-item" routerLink="/mobile_device_security-german" routerLinkActive="active" title="Sicherheit mobiler Geräte">
+    Sicherheit mobiler Geräte
   </a>
   <a aria-label="Transformator" class="menu-item" routerLink="/transformator" routerLinkActive="active" title="Transformator">
     Transformator

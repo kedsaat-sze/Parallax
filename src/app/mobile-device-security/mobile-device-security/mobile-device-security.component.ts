@@ -20,6 +20,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
     if (this.name !== "") {
       localStorage.setItem("name", this.name);
     }
+    globalVariables.germanPage = false;
   }
 
   async ngOnInit(): Promise<void> {
@@ -116,12 +117,13 @@ export class MobileDeviceSecurityComponent implements OnInit {
     });
   }
 
-  playOnDiv(flag?: boolean) {
-    if (!flag) {
-      this.audio!.paused ? this.audio!.play() : this.audio!.pause();
-    } else {
-      this.router.navigate([`/mobile_device_security-german${this.name ? "/" + this.name : ""}`]);
-    }
+  playOnDiv() {
+    this.audio!.paused ? this.audio!.play() : this.audio!.pause();
+  }
+
+  changeLanguage(event: Event) {
+    this.router.navigate([`/mobile_device_security-german${this.name ? "/" + this.name : ""}`]);
+    event.stopPropagation();
   }
 
   rateChange() {

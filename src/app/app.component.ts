@@ -9,6 +9,7 @@ import { globalVariables } from "./common/global_variables";
 })
 export class AppComponent implements OnInit {
   title = 'parallax';
+  get germanPage() { return globalVariables.germanPage; }
 
   constructor(private deviceInformationService: AngularDeviceInformationService) {
     globalVariables.usedOs = this.deviceInformationService.getDeviceInfo().os.toLowerCase();
