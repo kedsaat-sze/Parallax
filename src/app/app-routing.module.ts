@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'password_security', loadChildren: () => import('./password-security/password-security.module').then(m => m.PasswordSecurityModule) },
   { path: 'mobile_device_security', loadChildren: () => import('./mobile-device-security/mobile-device-security.module').then(m => m.MobileDeviceSecurityModule) },
   { path: 'mobile_device_security-german', loadChildren: () => import('./mobile-device-security-german/mobile-device-security-german.module').then(m => m.MobileDeviceSecurityGermanModule) },
+  { path: 'password_and_authentication', loadChildren: () => import('./password-and-authentication/password-and-authentication.module').then(m => m.PasswordAndAuthenticationModule) },
   { path: '**', component: PageNotFoundComponent}
 ];
 
