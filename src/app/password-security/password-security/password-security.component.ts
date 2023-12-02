@@ -17,8 +17,10 @@ export class PasswordSecurityComponent {
   client = globalVariables.client;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
-    this.name = this.route.snapshot.paramMap.get("name") || "";
-    this.client = this.route.snapshot.paramMap.get('client') || "";
+    this.route.queryParams.subscribe(params => {
+      this.client = params['client']|| "";
+      this.name = params['name'] || "";
+    });
     setLocalStorage(this.client, this.name);
   }
 
