@@ -1,13 +1,8 @@
 <body style="margin: 0px; display: grid;">
     <div id="container" (click)="playOnDiv()">
     </div>
-    <div id="audio-div" *ngIf="!loadDataError">
+    <div id="audio-div">
         <audio id="my-audio" controls style=" bottom: 0px; width: 1200px; position: absolute;" (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata">
-        <source src="https://storage.googleapis.com/sbox-parallax/phishing/audio/dialogue.mp3" type="audio/mpeg">
         </audio>
     </div>
-    <mat-card *ngIf="loadDataError">
-        <mat-card-content>Error while loading data</mat-card-content>
-    </mat-card>
-
 </body>
