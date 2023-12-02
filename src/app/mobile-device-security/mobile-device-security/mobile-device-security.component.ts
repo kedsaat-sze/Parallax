@@ -25,17 +25,22 @@ export class MobileDeviceSecurityComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.route.queryParams
+    .subscribe(params => {
+      this.client = params["client"] || "";
+      this.name = params["name"] || "";
+    });
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? "-" + localStorage.getItem("client") : ""}mobile_device_security/audio/mobile_device_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile_device_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? "-" + localStorage.getItem("client") : ""}mobile_device_security/audio/mobile_device_security.mp3`;
+    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile_device_security.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
       this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile_device_security.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? "-" + localStorage.getItem("client") : ""}mobile_device_security/mobile_device_security.json`)
+    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data, true)},
       error: err => {
