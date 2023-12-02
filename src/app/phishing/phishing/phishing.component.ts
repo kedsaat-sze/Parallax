@@ -30,7 +30,7 @@ export class PhishingComponent implements OnInit {
           .subscribe({
             next: (data) => {this.handleData(data)},
             error: error => {
-              !this.loadDataError;
+              this.loadDataError = true;
             }
           });
         }
