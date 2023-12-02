@@ -40,9 +40,9 @@ export class MobileDeviceSecurityComponent implements OnInit {
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile_device_security.mp3`;
+      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile-device-security.json`)
+    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data, true)},
       error: err => {
