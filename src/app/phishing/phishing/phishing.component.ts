@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { globalVariables } from "src/app/common/global_variables";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-phishing',
@@ -10,14 +11,17 @@ import { globalVariables } from "src/app/common/global_variables";
 export class PhishingComponent implements OnInit {
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audio: HTMLAudioElement | undefined;
+  client = globalVariables.client;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     console.log(globalVariables.usedOs);
   }
 
   ngOnInit(): void {
+    this.client = this.route.snapshot.paramMap.get('client')||"";
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.http.get<any>('https://storage.googleapis.com/sbox-parallax/phishing/phishing.json').subscribe((data) => {
+    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${this.client.length > 0 ? this.client+"/" : ""}phishing/phishing.json`).subscribe((data) => {
+      console.log(data);
       data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
         movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
         movie.description.screen != null ? this.createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s screen is null`);

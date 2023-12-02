@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularDeviceInformationService } from "angular-device-information";
 import { globalVariables } from "./common/global_variables";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import { globalVariables } from "./common/global_variables";
 })
 export class AppComponent implements OnInit {
   title = 'parallax';
+  client = globalVariables.client;
   get germanPage() { return globalVariables.germanPage; }
 
-  constructor(private deviceInformationService: AngularDeviceInformationService) {
+  constructor(private deviceInformationService: AngularDeviceInformationService, private route: ActivatedRoute) {
     globalVariables.usedOs = this.deviceInformationService.getDeviceInfo().os.toLowerCase();
     if (this.deviceInformationService.getDeviceInfo().os.toLowerCase().includes("mac")) {
       globalVariables.usedOs = "mac";
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit {
   }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.client = this.route.snapshot.paramMap.get('client')||"";
+  }
 
 }
