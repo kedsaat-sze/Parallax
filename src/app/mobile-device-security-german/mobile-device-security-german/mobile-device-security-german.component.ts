@@ -28,16 +28,16 @@ export class MobileDeviceSecurityGermanComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile_device_security-german${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security-german${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile_device_security-german.mp3`;
+    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security-german.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
       this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile_device_security-german.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security-german.json`)
+    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile-device-security-german.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data, true)},
       error: err => {
