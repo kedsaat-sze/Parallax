@@ -17,18 +17,25 @@ export class PhishingComponent implements OnInit {
     console.log(globalVariables.usedOs);
   }
 
+
   ngOnInit(): void {
-    this.client = this.route.snapshot.paramMap.get('client')||"";
+    this.client = this.route.snapshot.paramMap.get('client') || "";
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${this.client.length > 0 ? this.client+"/" : ""}phishing/phishing.json`).subscribe((data) => {
-      console.log(data);
-      data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
-        movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
-        movie.description.screen != null ? this.createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s screen is null`);
-        movie.description.midground != null ? this.createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s midground is null`);
-        movie.description.foreground != null ? this.createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s foreground is null`);
+    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${this.client.length > 0 ? this.client + "/" : ""}phishing/phishing.json`)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
+            movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
+            movie.description.screen != null ? this.createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s screen is null`);
+            movie.description.midground != null ? this.createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s midground is null`);
+            movie.description.foreground != null ? this.createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s foreground is null`);
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
       });
-    });
   }
 
   createImage(scene: string, id: string, resource: string, transform: {
