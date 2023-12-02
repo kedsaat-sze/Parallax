@@ -12,6 +12,7 @@ export class PhishingComponent implements OnInit {
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audio: HTMLAudioElement | undefined;
   client = globalVariables.client;
+  loadDataError = false;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     console.log(globalVariables.usedOs);
@@ -23,19 +24,26 @@ export class PhishingComponent implements OnInit {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
     this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${this.client.length > 0 ? this.client + "/" : ""}phishing/phishing.json`)
       .subscribe({
-        next: (data) => {
-          console.log(data);
-          data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
-            movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
-            movie.description.screen != null ? this.createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s screen is null`);
-            movie.description.midground != null ? this.createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s midground is null`);
-            movie.description.foreground != null ? this.createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s foreground is null`);
+        next: (data) => {this.handleData(data)},
+        error: err => {
+          this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/phishing/phishing.json`)
+          .subscribe({
+            next: (data) => {this.handleData(data)},
+            error: error => {
+              !this.loadDataError;
+            }
           });
-        },
-        error: error => {
-          console.log(error);
         }
       });
+  }
+
+  handleData(data: any) {
+    data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
+      movie.description.background != null ? this.createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s background is null`);
+      movie.description.screen != null ? this.createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s screen is null`);
+      movie.description.midground != null ? this.createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s midground is null`);
+      movie.description.foreground != null ? this.createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time) : console.log(`${movie.name}'s foreground is null`);
+    });
   }
 
   createImage(scene: string, id: string, resource: string, transform: {
