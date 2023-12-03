@@ -27,20 +27,20 @@ export class PhishingComponent implements OnInit {
 
   ngOnInit(): void {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/audio/phishing${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/audio/phishing${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/audio/phishing.mp3`;
+    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/audio/phishing.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/phishing/audio/phishing.mp3`;
+      this.audio!.src = `${globalVariables.bucketUrlPrefix}phishing/audio/phishing.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/phishing.json`)
+    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/phishing.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data)},
       error: err => {
-        this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/phishing/phishing.json`)
+        this.http.get<any>(`${globalVariables.bucketUrlPrefix}phishing/phishing.json`)
         .subscribe({
           next: (data) => {this.animationPlayers = handleData(data)},
           error: error => {

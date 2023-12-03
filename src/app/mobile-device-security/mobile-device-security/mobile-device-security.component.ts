@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
 import { handleData } from "../../common/create-animation.function";
-import { setLocalStorage } from "src/app/common/set-local-storage.function";
+import { setLocalStorage } from "../../common/set-local-storage.function";
 
 @Component({
   selector: 'app-mobile-device-security',
@@ -13,7 +13,6 @@ import { setLocalStorage } from "src/app/common/set-local-storage.function";
 export class MobileDeviceSecurityComponent implements OnInit {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
-  audioSrc: string = "";
   audio: HTMLAudioElement | undefined;
   client = globalVariables.client;
 
@@ -33,20 +32,20 @@ export class MobileDeviceSecurityComponent implements OnInit {
       this.name = params["name"] || "";
     });
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`;
+    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
+      this.audio!.src = `${globalVariables.bucketUrlPrefix}mobile_device_security/audio/mobile-device-security.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
+    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data, true)},
       error: err => {
-        this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/mobile_device_security/mobile_device_security.json`)
+        this.http.get<any>(`${globalVariables.bucketUrlPrefix}mobile_device_security/mobile_device_security.json`)
         .subscribe({
           next: (data) => {this.animationPlayers = handleData(data, true)},
           error: error => {
@@ -55,10 +54,6 @@ export class MobileDeviceSecurityComponent implements OnInit {
         });
       }
     });
-  }
-
-  changeUrl() {
-    this.audioSrc = `https://storage.googleapis.com/sbox-parallax/mobile_device_security/audio/mobile-device-security.mp3`;
   }
 
   // Play/pause the animations and set the audio's current time to animations

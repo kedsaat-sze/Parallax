@@ -13,7 +13,6 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 export class PasswordAndAuthenticationComponent {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
-  audioSrc: string = "";
   audio: HTMLAudioElement | undefined;
   client = globalVariables.client;
 
@@ -28,20 +27,20 @@ export class PasswordAndAuthenticationComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication.mp3`;
+    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/password_and_authentication/audio/password_and_authentication.mp3`;
+      this.audio!.src = `${globalVariables.bucketUrlPrefix}password_and_authentication/audio/password_and_authentication.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/password_and_authentication.json`)
+    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/password_and_authentication.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data, true)},
       error: err => {
-        this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/password_and_authentication/password_and_authentication.json`)
+        this.http.get<any>(`${globalVariables.bucketUrlPrefix}password_and_authentication/password_and_authentication.json`)
         .subscribe({
           next: (data) => {this.animationPlayers = handleData(data, true)},
           error: error => {
@@ -50,10 +49,6 @@ export class PasswordAndAuthenticationComponent {
         });
       }
     });
-  }
-
-  changeUrl() {
-    this.audioSrc = `https://storage.googleapis.com/sbox-parallax/password_and_authentication/audio/password_and_authentication.mp3`;
   }
 
   // Play/pause the animations and set the audio's current time to animations

@@ -26,20 +26,20 @@ export class PasswordSecurityComponent {
 
   ngOnInit(): void {
     this.audio = document.getElementById('my-audio') as HTMLAudioElement;
-    this.audio.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-    this.audio!.src = `https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security.mp3`;
+    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security.mp3`;
       }, false);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
-      this.audio!.src = `https://storage.googleapis.com/sbox-parallax/password_security/audio/password_security.mp3`;
+      this.audio!.src = `${globalVariables.bucketUrlPrefix}password_security/audio/password_security.mp3`;
       }, false);
-    this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/password_security.json`)
+    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/password_security.json`)
     .subscribe({
       next: (data) => {this.animationPlayers = handleData(data)},
       error: err => {
-        this.http.get<any>(`https://storage.googleapis.com/sbox-parallax/password_security/password_security.json`)
+        this.http.get<any>(`${globalVariables.bucketUrlPrefix}password_security/password_security.json`)
         .subscribe({
           next: (data) => {this.animationPlayers = handleData(data)},
           error: error => {
