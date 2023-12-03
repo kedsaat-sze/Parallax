@@ -14,7 +14,7 @@ export class PhishingComponent implements OnInit {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audio: HTMLAudioElement | undefined;
-  client = globalVariables.client;
+  client = "";
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {

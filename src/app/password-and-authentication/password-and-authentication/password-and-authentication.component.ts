@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
-import { handleData } from "src/app/common/create-animation.function";
+import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
 
 @Component({
@@ -14,7 +14,7 @@ export class PasswordAndAuthenticationComponent {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audio: HTMLAudioElement | undefined;
-  client = globalVariables.client;
+  client = "";
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
     this.route.queryParams.subscribe(params => {

@@ -10,7 +10,8 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class AppComponent implements OnInit {
   title = 'parallax';
-  client = globalVariables.client;
+  client = "";
+  name = ""
   get germanPage() { return globalVariables.germanPage; }
 
   constructor(private deviceInformationService: AngularDeviceInformationService, private route: ActivatedRoute) {
@@ -26,7 +27,6 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.client = this.route.snapshot.paramMap.get('client')||"";
   }
 
 }

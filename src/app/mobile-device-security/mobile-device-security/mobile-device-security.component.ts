@@ -14,7 +14,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
   name: string = "";
   animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
   audio: HTMLAudioElement | undefined;
-  client = globalVariables.client;
+  client = "";
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
     this.route.queryParams.subscribe(params => {
