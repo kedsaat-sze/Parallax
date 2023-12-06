@@ -45,6 +45,7 @@ export class PhishingComponent implements OnInit {
           next: (data) => {this.animationPlayers = handleData(data)},
           error: error => {
             this.router.navigate(['/page-not-found']);
+            console.log("test");
           }
         });
       }
