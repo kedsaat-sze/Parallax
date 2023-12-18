@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularDeviceInformationService } from "angular-device-information";
 import { globalVariables } from "./common/global_variables";
-import { ActivatedRoute } from "@angular/router";
 import { SocialAuthService } from "@abacritt/angularx-social-login";
 
 @Component({
@@ -17,7 +16,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private deviceInformationService: AngularDeviceInformationService,
-    private route: ActivatedRoute,
     protected socialAuthService: SocialAuthService) {
     globalVariables.usedOs = this.deviceInformationService.getDeviceInfo().os.toLowerCase();
     if (this.deviceInformationService.getDeviceInfo().os.toLowerCase().includes("mac")) {
