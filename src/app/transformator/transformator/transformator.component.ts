@@ -97,7 +97,6 @@ setDefaultValue() {
 
 transformGenerate() {
   // A transform tulajdonság értékének generálása
-  console.log("transformGenerate");
   this.pistaElement!.style.transform = `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg) scaleX(${this.scaleX}) scaleY(${this.scaleY}) scaleZ(${this.scaleZ}) translateX(${this.translateX}%) translateY(${this.translateY}%) skewX(${this.skewX}deg) skewY(${this.skewY}deg)`;
     this.transformValue = `transform: ${this.pistaElement!.style.transform}`;
 }

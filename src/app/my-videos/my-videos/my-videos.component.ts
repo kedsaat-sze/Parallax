@@ -2,10 +2,8 @@ import { GoogleLoginProvider, SocialAuthService } from "@abacritt/angularx-socia
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
 import { globalVariables } from "src/app/common/global_variables";
-import * as defaultJson from "../../../assets/default_movie_description.json";
-import { environment } from '../../../environments/environment';
+import defaultJson from "../../../assets/default_movie_description.json";
 import { FileInput } from "ngx-material-file-input";
 
 export interface Video {
@@ -50,8 +48,6 @@ export class MyVideosComponent implements OnInit {
   getAccessToken(): void {
     this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then((accessToken) => {
       this.accessToken = accessToken;
-      console.log(this.accessToken);
-      console.log(accessToken);
     });
   }
 
@@ -158,7 +154,6 @@ export class MyVideosComponent implements OnInit {
     this.http.get<any>(`${globalVariables.bucketObjectPrefix}?prefix=users/${localStorage.getItem("useremail")}/vid`)
     .subscribe({
       next: (data) => {
-        console.log(data);
         Promise.all(data.items.map((item: any) => {
           const videoName = item.name.split(`users/${localStorage.getItem("useremail")}/vid_`)[1].split("/")[0];
           const found = tempData.find((element) => {
@@ -174,7 +169,6 @@ export class MyVideosComponent implements OnInit {
           } else {
             tempData[tempData.indexOf(found)][isJson ? "json" : "audio"] = item.name;
           }
-          console.log(tempData);
           this.dataSource = tempData;
         }));
       },
