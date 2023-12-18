@@ -1,0 +1,332 @@
+{
+    "movie": [
+        {
+            "name": "scene1",
+            "from_time": 0,
+            "animation_time": 10,
+            "animation_mode": "linear",
+            "description": {
+                "background": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_03_BG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                },
+                "screen": {
+                    "resource": "",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "rotateX(0deg) rotateY(4.02deg) rotateZ(-0.01deg) scaleX(0.599) scaleY(0.569) scaleZ(1) translateX(8.6%) translateY(-18.7%) skewX(0deg) skewY(-0.44deg)",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "rotateX(0deg) rotateY(4.02deg) rotateZ(-0.01deg) scaleX(0.599) scaleY(0.569) scaleZ(1) translateX(8.6%) translateY(-18.7%) skewX(0deg) skewY(-0.44deg)",
+                            "scale": 1.2,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                },
+                "midground": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_03_MG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.2,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                },
+                "foreground": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_03_FG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.5,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            "transition_to": {
+                "how": "fade",
+                "to_what": "scene2"
+            }
+        },
+        {
+            "name": "scene2",
+            "from_time": 10,
+            "animation_time": 10,
+            "animation_mode": "linear",
+            "description": {
+                "background": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_06_BG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1.2,
+                            "rotate": 0,
+                            "opacity": 0,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 10,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 80,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.2,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                },
+                "screen": {
+                    "resource": "",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "rotateX(-12deg) rotateY(-77deg) rotateZ(-10deg) scaleX(0.296) scaleY(0.629) scaleZ(1) translateX(0%) translateY(-1.5%) skewX(-14.34deg) skewY(7.89deg)",
+                            "scale": 1.1,
+                            "rotate": 0,
+                            "opacity": 0,
+                            "position": {
+                                "x": 313,
+                                "y": 10
+                            }
+                        },
+                        {
+                            "percent": 10,
+                            "transform": "rotateX(-12deg) rotateY(-77deg) rotateZ(-10deg) scaleX(0.296) scaleY(0.629) scaleZ(1) translateX(0%) translateY(-1.5%) skewX(-14.34deg) skewY(7.89deg)",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 296,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "percent": 80,
+                            "transform": "rotateX(-12deg) rotateY(-77deg) rotateZ(-10deg) scaleX(0.296) scaleY(0.629) scaleZ(1) translateX(0%) translateY(-1.5%) skewX(-14.34deg) skewY(7.89deg)",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 296,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "rotateX(-12deg) rotateY(-77deg) rotateZ(-10deg) scaleX(0.296) scaleY(0.629) scaleZ(1) translateX(0%) translateY(-1.5%) skewX(-14.34deg) skewY(7.89deg)",
+                            "scale": 1.05,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 313,
+                                "y": 1
+                            }
+                        }
+                    ]
+                },
+                "midground": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_06_MG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1.06,
+                            "rotate": 0,
+                            "opacity": 0,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 10,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 80,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.06,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                },
+                "foreground": {
+                    "resource": "https://storage.googleapis.com/sbox-parallax/graphic_images/00_06_FG.png",
+                    "transform": [
+                        {
+                            "percent": 0,
+                            "transform": "",
+                            "scale": 1.4,
+                            "rotate": 0,
+                            "opacity": 0,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 10,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 80,
+                            "transform": "",
+                            "scale": 1,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "percent": 100,
+                            "transform": "",
+                            "scale": 1.2,
+                            "rotate": 0,
+                            "opacity": 1,
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            "transition_to": {
+                "how": "fade",
+                "to_what": "end"
+            }
+        }
+    ]
+}

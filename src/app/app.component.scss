@@ -16,13 +16,14 @@
     height: 60px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
+    background-color: rgb(25, 117, 210, 0.2);
     color: white;
     font-weight: 600;
-    opacity: 0.2;
+    //opacity: 0.2;
 }
 .toolbar:hover {
-    opacity: 0.8;
+    //opacity: 0.8;
+    background-color: rgb(25, 117, 210, 0.8);
     transition: .4s;
 }
 
@@ -37,7 +38,7 @@ a, a:visited, a:hover {
     margin-right: 3px;
     border: 2px whitesmoke solid;
     border-radius: 10px;
-    background-color: #166ec5;
+    background-color: rgb(23, 110, 196, 0.2);
 }
 
 .menu-item.active {
@@ -47,7 +48,7 @@ a, a:visited, a:hover {
     border: 2px whitesmoke solid;
     border-radius: 10px;
     background-color: whitesmoke;
-    color: #166ec5;
+    color: rgb(22, 110, 197);
 }
 
 .menu-item.active:hover {
@@ -55,10 +56,18 @@ a, a:visited, a:hover {
     border: 2px whitesmoke solid;
     border-radius: 10px;
     background-color: whitesmoke;
-    color: #166ec5;
+    color: rgb(23, 110, 196);
 }
 
 .menu-item:hover {
-    background-color: #1566b7;
+    background-color: rgb(21, 102, 183);
     padding: 15px;
+}
+
+.authed-user-div{
+    text-align: right;
+    position: fixed;
+    right: 2rem;
+    color: black;
+    opacity: 1;
 }

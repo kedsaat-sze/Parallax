@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularDeviceInformationService } from "angular-device-information";
 import { globalVariables } from "./common/global_variables";
 import { ActivatedRoute } from "@angular/router";
+import { SocialAuthService } from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,10 @@ export class AppComponent implements OnInit {
   name = ""
   get germanPage() { return globalVariables.germanPage; }
 
-  constructor(private deviceInformationService: AngularDeviceInformationService, private route: ActivatedRoute) {
+  constructor(
+    private deviceInformationService: AngularDeviceInformationService,
+    private route: ActivatedRoute,
+    protected socialAuthService: SocialAuthService) {
     globalVariables.usedOs = this.deviceInformationService.getDeviceInfo().os.toLowerCase();
     if (this.deviceInformationService.getDeviceInfo().os.toLowerCase().includes("mac")) {
       globalVariables.usedOs = "mac";
@@ -27,6 +31,11 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log(this.socialAuthService.authState);
+      localStorage.setItem("username", user.name);
+      localStorage.setItem("useremail", user.email);
+    });
   }
 
 }

@@ -1,0 +1,57 @@
+<mat-card>
+    <!--My videos-->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container *ngIf="isLoggedinUser" matColumnDef="modify">
+            <th mat-header-cell *matHeaderCellDef class="action-cell"> Modify </th>
+            <td mat-cell class="action-cell" *matCellDef="let element">
+                <div class="example-button-container">
+                    <button mat-mini-fab (click)="onModify(element)">
+                        <mat-icon matTooltip="Modify">edit</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>
+<div style="position: relative; top: 80px !important; height: 33rem;">
+<mat-card style="margin: 1rem 0rem; padding: 1rem; top: 0 !important;">
+    <!--Create/Modify video-->
+    <form class="my-video-form" (ngSubmit)="videoSubmit(myVideoForm)" #myVideoForm="ngForm">
+        <mat-form-field class="mat-form-field" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [ngModel]="modifyMode ? modifyRecord.name : undefined" id="name" name="name"
+            required autocomplete="off" placeholder="Name" #name="ngModel">
+            <mat-error *ngIf="name.hasError('required')">Required to fill!</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="mat-form-field" appearance="outline">
+            <mat-label>Upload new audio file</mat-label>
+            <ngx-mat-file-input [(ngModel)]="selectedFile" id="file" name="file" required accept="audio/*" placeholder="..." #file="ngModel">
+            </ngx-mat-file-input>
+            <mat-error *ngIf="file.hasError('required')">Required to fill!</mat-error>
+        </mat-form-field>
+        <div style="float: right; width: 75%; height: 20rem; position: relative; top: -5rem;">
+            <mat-label>JSON</mat-label>
+            <ngx-monaco-editor class="monaco-editor" [options]="editorOptions"
+            [(ngModel)]="JSON" name="json" id="json"
+            (paste)="formatJSON()" required #json="ngModel"></ngx-monaco-editor>
+            <mat-error *ngIf="json.hasError('required')">Required to fill!</mat-error>
+            <button class="btn btn-primary" style="margin-top: 0.45rem !important;" type="button" (click)="formatJSON()">format</button>
+        </div>
+        <div class="clearfix" *ngIf="modifyMode"></div>
+        </form>
+        <mat-card-actions>
+            <button class="btn-primary" (click)="videoSubmit(myVideoForm)" [hidden]="modifyMode"
+            [disabled]="myVideoForm.invalid">Submit</button>
+            <button class="btn btn-primary" (click)="videoSubmit(myVideoForm)" [disabled]="myVideoForm.invalid"
+            [hidden]="!modifyMode">Modify</button>
+            <button class="btn btn-primary" type="button" (click)="resetForm(myVideoForm)">Cancel</button>
+        </mat-card-actions>
+</mat-card>
+</div>
