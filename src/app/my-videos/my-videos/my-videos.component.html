@@ -32,8 +32,8 @@
         <br>
         <mat-form-field class="mat-form-field" appearance="outline">
             <mat-label>Upload new audio file</mat-label>
-            <ngx-mat-file-input [(ngModel)]="selectedFile" id="file" name="file" required accept="audio/*" placeholder="..." #file="ngModel">
-            </ngx-mat-file-input>
+            <input [(ngModel)]="selectedFile" type="file" id="file" name="file" required accept="audio/*" placeholder="..." #file="ngModel">
+            </input>
             <mat-error *ngIf="file.hasError('required')">Required to fill!</mat-error>
         </mat-form-field>
         <div style="float: right; width: 75%; height: 20rem; position: relative; top: -5rem;">
