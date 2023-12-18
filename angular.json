@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "parallax:build:production"
+              "browserTarget": "parallax:build:production"
             },
             "development": {
-              "buildTarget": "parallax:build:development"
+              "browserTarget": "parallax:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "parallax:build"
+            "browserTarget": "parallax:build"
           }
         },
         "test": {
