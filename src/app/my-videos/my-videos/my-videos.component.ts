@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { globalVariables } from "src/app/common/global_variables";
 import defaultJson from "../../../assets/default_movie_description.json";
-import { FileInput } from "ngx-material-file-input";
 
 export interface Video {
   name?: string;
@@ -27,7 +26,7 @@ export class MyVideosComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'json'};
   isValidJSON = true;
   JSON = "";
-  selectedFile: FileInput | undefined;
+  selectedFile: File | undefined;
   selectedVideo: Video | undefined;
 
   constructor(
@@ -68,7 +67,7 @@ export class MyVideosComponent implements OnInit {
     } else {
       let file: File = new File([this.JSON], `${form.value.name}.json`, {type: "application/json"});
       this.uploadFile(file, form);
-      this.uploadFile(this.selectedFile!.files[0], form);
+      this.uploadFile(this.selectedFile!, form);
       this.resetForm(form);
       this.getVideos();
     }
@@ -147,6 +146,10 @@ export class MyVideosComponent implements OnInit {
         this.formatJSON();
       }
     });
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0] ?? null;
   }
 
   getVideos() {

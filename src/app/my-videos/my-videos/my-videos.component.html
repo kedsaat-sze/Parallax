@@ -30,12 +30,12 @@
             <mat-error *ngIf="name.hasError('required')">Required to fill!</mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="mat-form-field" appearance="outline">
-            <mat-label>Upload new audio file</mat-label>
-            <input [(ngModel)]="selectedFile" type="file" id="file" name="file" required accept="audio/*" placeholder="..." #file="ngModel">
-            </input>
-            <mat-error *ngIf="file.hasError('required')">Required to fill!</mat-error>
-        </mat-form-field>
+        <div class="mat-form-field" appearance="outline">
+            <mat-label *ngIf="selectedFile == undefined || selectedFile == null">Upload new audio file</mat-label>
+            <span class="file-name">{{selectedFile?.name}}</span>
+            <button type="button" mat-raised-button (click)="file.click()">Choose File</button>
+            <input hidden (change)="onFileSelected($event)" #file type="file" accept="audio/*">
+        </div>
         <div style="float: right; width: 75%; height: 20rem; position: relative; top: -5rem;">
             <mat-label>JSON</mat-label>
             <ngx-monaco-editor class="monaco-editor" [options]="editorOptions"
