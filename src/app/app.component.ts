@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
-      console.log(this.socialAuthService.authState);
       localStorage.setItem("username", user.name);
       localStorage.setItem("useremail", user.email);
     });
