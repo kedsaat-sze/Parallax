@@ -86,10 +86,10 @@ export class MyVideosComponent implements OnInit {
       }})
     .subscribe({
       next: () => {
-        console.log("Video added successfully");
+        console.log(`${file.name} added successfully`);
       },
       error: (err) => {
-        console.log("Error occured while adding video: " + err.message);
+        console.log(`Error occured while adding ${file.name}: ${err.message}`);
       }
     });
   }
@@ -133,14 +133,14 @@ export class MyVideosComponent implements OnInit {
   }
 
   loadDefaultJSON() {
-    this.http.get<any>(`${globalVariables.bucketObjectPrefix}users/default_movie_description.json`)
+    this.http.get<any>(`${globalVariables.bucketUrlPrefix}users/default_movie_description.json`)
     .subscribe({
       next: (data) => {
         this.JSON = data;
         this.formatJSON();
       },
       error: (err) => {
-        console.log("Error occured while fetching videos: " + err.message);
+        console.log("Error occured while fetching json: " + err.message);
         const tempJson = defaultJson;
         this.JSON = JSON.stringify({movie: tempJson.movie}, null, "\t");
         this.formatJSON();
@@ -176,7 +176,7 @@ export class MyVideosComponent implements OnInit {
         }));
       },
       error: (err) => {
-        console.log("Error occured while fetching videos: " + err.message);
+        console.log("Error occured while fetching data: " + err.message);
       }
     });
   }
