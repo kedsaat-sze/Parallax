@@ -39,7 +39,7 @@
         <div style="float: right; width: 75%; height: 20rem; position: relative; top: -5rem;">
             <mat-label>JSON</mat-label>
             <ngx-monaco-editor class="monaco-editor" [options]="editorOptions"
-            [(ngModel)]="JSON" name="json" id="json"
+            [(ngModel)]="JSONFile" name="json" id="json"
             (paste)="formatJSON()" required #json="ngModel"></ngx-monaco-editor>
             <mat-error *ngIf="json.hasError('required')">Required to fill!</mat-error>
             <button class="btn btn-primary" style="margin-top: 0.45rem !important;" type="button" (click)="formatJSON()">format</button>

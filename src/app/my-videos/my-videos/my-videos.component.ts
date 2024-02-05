@@ -25,7 +25,7 @@ export class MyVideosComponent implements OnInit {
   modifyRecord: Video = {};
   editorOptions = {theme: 'vs-dark', language: 'json'};
   isValidJSON = true;
-  JSON = "";
+  JSONFile = "";
   selectedFile: File | undefined;
   selectedVideo: Video | undefined;
 
@@ -65,7 +65,7 @@ export class MyVideosComponent implements OnInit {
       }); */
       console.log("modify mode");
     } else {
-      let file: File = new File([this.JSON], `${form.value.name}.json`, {type: "application/json"});
+      let file: File = new File([this.JSONFile], `${form.value.name}.json`, {type: "application/json"});
       this.uploadFile(file, form);
       this.uploadFile(this.selectedFile!, form);
       this.resetForm(form);
@@ -76,10 +76,7 @@ export class MyVideosComponent implements OnInit {
   uploadFile(file: File, form: NgForm) {
     this.http.post<any>(
       `${globalVariables.bucketObjectPrefixWithoutSlash}?name=users/${localStorage.getItem("useremail")}/vid_${form.value.name}/${file.name}`,
-      {
-        "data": file.arrayBuffer(),
-        "cacheControl": "public, max-age=1",
-      },
+      file,
       {headers: {
         "Content-Type": file.type,
         "Authorization": `Bearer ${this.accessToken}`,
@@ -98,7 +95,10 @@ export class MyVideosComponent implements OnInit {
     this.modifyMode = true;
     this.http.get<any>(`${globalVariables.bucketUrlPrefix}${element.json}`)
     .subscribe({
-      next: (data) => {this.JSON = data;},
+      next: (data) => {
+        this.JSONFile = JSON.stringify(data);
+        this.formatJSON();
+      },
       error: error => {
         console.log("Error occured while fetching JSON file: " + error.message);
       }
@@ -114,12 +114,12 @@ export class MyVideosComponent implements OnInit {
   }
 
   formatJSON() {
-    if (this.JSON) {
-      try { JSON.parse(this.JSON) } catch { this.isValidJSON = false }
+    if (this.JSONFile) {
+      try { JSON.parse(this.JSONFile) } catch { this.isValidJSON = false }
       if (!this.isValidJSON) {
         console.log("Invalid JSON");
       } else {
-        this.JSON = JSON.stringify(JSON.parse(this.JSON), null, 4);
+        this.JSONFile = JSON.stringify(JSON.parse(this.JSONFile), null, 4);
       }
     }
   }
@@ -133,19 +133,9 @@ export class MyVideosComponent implements OnInit {
   }
 
   loadDefaultJSON() {
-    this.http.get<any>(`${globalVariables.bucketUrlPrefix}users/default_movie_description.json`)
-    .subscribe({
-      next: (data) => {
-        this.JSON = data;
-        this.formatJSON();
-      },
-      error: (err) => {
-        console.log("Error occured while fetching json: " + err.message);
-        const tempJson = defaultJson;
-        this.JSON = JSON.stringify({movie: tempJson.movie}, null, "\t");
-        this.formatJSON();
-      }
-    });
+    const tempJson = defaultJson;
+    this.JSONFile = JSON.stringify({movie: tempJson.movie}, null, "\t");
+    this.formatJSON();
   }
 
   onFileSelected(event: any): void {
