@@ -63,7 +63,6 @@ export class MyVideosComponent implements OnInit {
           console.log("Error occured while updating video: " + err.message);
         }
       }); */
-      console.log("modify mode");
     } else {
       let file: File = new File([this.JSONFile], `${form.value.name}.json`, {type: "application/json"});
       this.uploadFile(file, form);
