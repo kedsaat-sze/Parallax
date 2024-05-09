@@ -1,0 +1,30 @@
+.btn-primary {
+    height: 2rem;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+::ng-deep mat-dialog-container {
+    background-color: aliceblue;
+    width: 100% !important;
+    display: contents !important;
+}
+::ng-deep .cdk-overlay-pane {
+    max-width: 100% !important;
+    padding: 1rem !important;
+    height: 94% !important;
+}
+
+
+:host::ng-deep .animated-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+:host::ng-deep .paused{
+    -webkit-animation-play-state:paused !important;
+    -moz-animation-play-state:paused !important;
+    -o-animation-play-state:paused !important;
+    animation-play-state:paused !important;
+}

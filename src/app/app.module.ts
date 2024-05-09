@@ -12,13 +12,20 @@ import {
   SocialAuthServiceConfig,
   GoogleLoginProvider
 } from '@abacritt/angularx-social-login';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogComponent } from './common/components/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { StarRatingModule } from "angular-star-rating";
+import { SharedVideosComponent } from "./shared-videos/shared-videos.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
+    DialogComponent,
+    SharedVideosComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     SocialLoginModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    HttpClientModule,
+    StarRatingModule.forRoot(),
   ],
   providers: [
     AngularDeviceInformationService,

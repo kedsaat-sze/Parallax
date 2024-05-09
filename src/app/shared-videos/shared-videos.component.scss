@@ -1,0 +1,34 @@
+:host::ng-deep .animated-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+:host::ng-deep .paused{
+    -webkit-animation-play-state:paused !important;
+    -moz-animation-play-state:paused !important;
+    -o-animation-play-state:paused !important;
+    animation-play-state:paused !important;
+}
+
+#container {
+    width: 60vw !important;
+    height: 34vw !important;
+    max-height: 100vh !important;
+    max-width: 176vh !important;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+#audio-div {
+    height: 50px;
+    width: 60vw !important;
+    max-width: 176vh !important;
+    top: -50px;
+    position: relative;
+}

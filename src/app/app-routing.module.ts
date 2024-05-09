@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AuthGuardService } from "./common/auth-guard.service";
+import { SharedVideosComponent } from "./shared-videos/shared-videos.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
+  { path: 'sharedvideos', component: SharedVideosComponent },
   { path: 'transformator', loadChildren: () => import('./transformator/transformator.module').then(m => m.TransformatorModule), canActivate: [AuthGuardService] },
   { path: 'phishing', loadChildren: () => import('./phishing/phishing.module').then(m => m.PhishingModule), canActivate: [AuthGuardService] },
   { path: 'password_security', loadChildren: () => import('./password-security/password-security.module').then(m => m.PasswordSecurityModule), canActivate: [AuthGuardService] },

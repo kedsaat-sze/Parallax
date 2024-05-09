@@ -2,8 +2,11 @@ import { GoogleLoginProvider, SocialAuthService } from "@abacritt/angularx-socia
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { globalVariables } from "src/app/common/global_variables";
+import { globalVariables } from "../../common/global_variables";
 import defaultJson from "../../../assets/default_movie_description.json";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogComponent } from "../../common/components/dialog/dialog.component";
+import { DialogDataBinder } from "../../common/components/dialog/dialog.data.binder";
 
 export interface Video {
   name?: string;
@@ -31,15 +34,16 @@ export class MyVideosComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    public dialog: MatDialog,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
       this.isLoggedinUser = localStorage.getItem("useremail") === user.email;
     });
     this.getAccessToken();
-    this.displayedColumns = this.isLoggedinUser ? ["name", "modify"] : ["name"];
+    this.displayedColumns = this.isLoggedinUser ? ["name", "modify", "play"] : ["name"];
     this.getVideos();
     this.loadDefaultJSON();
   }
@@ -110,6 +114,19 @@ export class MyVideosComponent implements OnInit {
         console.log("Error occured while fetching JSON file: " + error.message);
       }
     });
+  }
+
+  onPlay(element: Video) {
+    console.log(element);
+    const dialogRef = this.dialog.open(
+      DialogComponent,
+      new DialogDataBinder(
+        element.name,
+        element.name,
+        element.audio,
+        localStorage.getItem("useremail") || undefined
+      )
+    );
   }
 
   formatJSON() {

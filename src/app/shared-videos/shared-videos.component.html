@@ -1,0 +1,15 @@
+<body style="margin: 0px; display: grid;">
+    <h2 style="margin: 4rem 0 0 1rem;">
+        {{header}}
+        <star-rating [rating]="rating" [labelText]="rating.toString()" (starClickChange)="onRate($event.rating)"
+            style="display: inline-block; position: sticky; left: 53vw;">
+        </star-rating>
+    </h2>
+    <div id="container" (click)="playOnDiv()" style="margin: 0 1rem 0 1rem;">
+    </div>
+    <div id="audio-div">
+        <audio id="my-audio" controls (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata"
+        style=" bottom: 0px; position: absolute; margin-left: 1rem; width: 60vw !important; max-width: 176vh !important;">
+        </audio>
+    </div>
+</body>
