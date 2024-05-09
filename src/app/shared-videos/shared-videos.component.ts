@@ -58,7 +58,6 @@ export class SharedVideosComponent {
 
   async getAccessToken(): Promise<void> {
     this.socialAuthService.initState.subscribe({complete: () => {
-      console.log("rediii");
       this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then((accessToken) => {
         this.accessToken = accessToken;
       });
