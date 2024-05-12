@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AngularDeviceInformationService } from "angular-device-information";
 import { globalVariables } from "./common/global_variables";
-import { SocialAuthService } from "@abacritt/angularx-social-login";
 import { Auth, GoogleAuthProvider, signInWithPopup } from "@angular/fire/auth";
 import { SharedDataService } from "./common/shared-data.service";
 

@@ -1,7 +1,5 @@
-import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, map, tap } from "rxjs";
+import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
 import { SharedDataService } from "./shared-data.service";
 
 @Injectable({
@@ -12,7 +10,7 @@ import { SharedDataService } from "./shared-data.service";
     constructor(private router: Router) {
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    canActivate(route: ActivatedRouteSnapshot): boolean {
         if (!SharedDataService.userId && !SharedDataService.email) {
             this.router.navigate(['home']);
             return false;

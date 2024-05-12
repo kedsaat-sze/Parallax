@@ -4,13 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run config && ng build",
+    "config": "ts-node server.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "@abacritt/angularx-social-login": "2.0.0",
     "@angular/animations": "^16.1.1",
     "@angular/cdk": "^16.1.1",
     "@angular/common": "^16.1.1",

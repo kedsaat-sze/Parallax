@@ -49,4 +49,4 @@ firebase.json
 firestore.indexes.json
 firestore.rules
 storage.rules
-environments/environment.ts
+/src/environments/**

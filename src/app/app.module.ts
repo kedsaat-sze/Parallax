@@ -7,10 +7,6 @@ import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './home/home.component';
 import { AngularDeviceInformationService } from 'angular-device-information';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {
-  SocialLoginModule,
-  GoogleLoginProvider
-} from '@abacritt/angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './common/components/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,15 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { StarRatingModule } from "angular-star-rating";
 import { SharedVideosComponent } from "./shared-videos/shared-videos.component";
 import { initializeApp  } from "firebase/app";
-import { firebaseConfig } from "src/environments/environment";
+import { environment } from "src/environments/environment";
 import { getAuth, connectAuthEmulator, provideAuth } from "@angular/fire/auth";
 import { provideFirebaseApp } from "@angular/fire/app";
 import { getFirestore, connectFirestoreEmulator, provideFirestore } from "@angular/fire/firestore";
 import { getStorage, connectStorageEmulator, provideStorage } from "@angular/fire/storage";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { AuthGuard } from "@angular/fire/auth-guard";
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -41,14 +35,13 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     AppRoutingModule,
     FormsModule,
     MatCardModule,
-    SocialLoginModule,
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     StarRatingModule.forRoot(),
-    provideFirebaseApp(() =>  initializeApp(firebaseConfig)),
+    provideFirebaseApp(() =>  initializeApp(environment)),
     provideAuth(() => {
       const  auth = getAuth();
       if (location.hostname === 'localhost') {
@@ -73,7 +66,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
   ],
   providers: [
     AngularDeviceInformationService,
-    //AuthGuard, { provide: FIREBASE_OPTIONS, useValue: firebaseConfig }    
+    //AuthGuard, { provide: FIREBASE_OPTIONS, useValue: environment }    
   ],
   bootstrap: [AppComponent]
 })
