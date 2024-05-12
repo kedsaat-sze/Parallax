@@ -48,7 +48,7 @@ export class SharedVideosComponent {
         this.header = `${this.emailAddress}'s "${this.videoName}"`;
       }
     });
-    this.sharedData$ = this.sharedDataService.getCollectionData(`sharedvideos/${this.header}/rats`) as  Observable<{userId: string, rating: number, id: string}[]>;
+    this.sharedData$ = this.sharedDataService.getCollectionData(`sharedvideos/${this.header}/ratings`) as  Observable<{userId: string, rating: number, id: string}[]>;
     this.sharedComments$ = this.sharedDataService.getComments(`sharedvideos/${this.header}/comments`) as  Observable<{}[]>;
   }
 
@@ -91,7 +91,7 @@ export class SharedVideosComponent {
 
   async onRate(rating: number) {
     if (this.alreadyVoted) {
-      await this.sharedDataService.updateRating(`sharedvideos/${this.header}/rats/${this.myRatingDocumentId}`, `rating`, rating);
+      await this.sharedDataService.updateRating(`sharedvideos/${this.header}/ratings/${this.myRatingDocumentId}`, `rating`, rating);
     } else {
       await this.sharedDataService.addRating(`sharedvideos/${this.header}/ratings`, {userId: this.userId, rating: rating});
     }
