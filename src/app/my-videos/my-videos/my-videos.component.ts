@@ -74,7 +74,7 @@ export class MyVideosComponent implements OnInit {
 
   async onCopy(element: Video) {
     this._snackBar.open("Copied to clipboard!");
-    await this.clipboard.copy(`localhost:4200/sharedvideos?emailaddress=${this.email}&videoname=${element.name}&audioname=${element.audio?.split("/").pop()}`);
+    await this.clipboard.copy(`${location.hostname}/sharedvideos?emailaddress=${this.email}&videoname=${element.name}&audioname=${element.audio?.split("/").pop()}`);
   }
 
 
