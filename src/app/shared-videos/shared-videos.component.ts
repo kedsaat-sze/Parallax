@@ -21,7 +21,7 @@ export class SharedVideosComponent {
   header: string = "";
   rating: number = 0;
   sharedDataService = inject(SharedDataService);
-  sharedData$?: Observable<{}[]>;
+  sharedData$?: Observable<{userId: string, rating: number, id: string}[]>;
   sharedComments$?: Observable<{}[]>;
   ratingAvg: number = 0;
   votedString: string = "You did not vote yet.";
@@ -30,6 +30,7 @@ export class SharedVideosComponent {
   wantedComments: boolean = false;
   comments: MyComment[] = [];
   comment: string = "";
+  myRatingDocumentId: string = "";
 
   get userId() { return SharedDataService.userId; }
   get displayName() { return SharedDataService.displayName; }
@@ -47,7 +48,7 @@ export class SharedVideosComponent {
         this.header = `${this.emailAddress}'s "${this.videoName}"`;
       }
     });
-    this.sharedData$ = this.sharedDataService.getCollectionData(`sharedvideos`) as  Observable<{}[]>;
+    this.sharedData$ = this.sharedDataService.getCollectionData(`sharedvideos/${this.header}/rats`) as  Observable<{userId: string, rating: number, id: string}[]>;
     this.sharedComments$ = this.sharedDataService.getComments(`sharedvideos/${this.header}/comments`) as  Observable<{}[]>;
   }
 
@@ -89,31 +90,39 @@ export class SharedVideosComponent {
   }
 
   async onRate(rating: number) {
-    await this.sharedDataService.updateRating(`sharedvideos/${this.header}`, `ratings.${this.userId}`, rating);
+    if (this.alreadyVoted) {
+      await this.sharedDataService.updateRating(`sharedvideos/${this.header}/rats/${this.myRatingDocumentId}`, `rating`, rating);
+    } else {
+      await this.sharedDataService.addRating(`sharedvideos/${this.header}/ratings`, {userId: this.userId, rating: rating});
+    }
   }
 
   wantRate() {
     this.wantedRate = true;
     this.sharedData$!.subscribe(data => {
+      console.log(data);
       let sum = 0;
       let count = 0;
-      data.forEach((element: any) => {
-        const myVote = element.ratings[this.userId];
-        Object.values(element.ratings).forEach((elem) => {
-          sum += Number(elem);
-          count++;
-        });
-        this.ratingAvg = Number((sum/count).toFixed(3));
-        if (myVote !== undefined) {
-          this.alreadyVoted = true;
-          this.votedString = `You voted ${myVote} out of 5. (Avg: ${this.ratingAvg})`;
-          this.rating = myVote;
+      let myVote = undefined;
+      data.forEach((elem) => {
+        console.log(elem);
+        if (elem.userId === this.userId) {
+          myVote = elem.rating;
+          this.myRatingDocumentId = elem.id;
         }
-        if (!this.alreadyVoted) {
-          this.rating = this.ratingAvg;
-          this.votedString = `The average rating is ${this.ratingAvg} out of 5.`;
-        }
+        sum += elem.rating;
+        count++;
       });
+      this.ratingAvg = Number((sum/count).toFixed(3));
+      if (myVote !== undefined) {
+        this.alreadyVoted = true;
+        this.votedString = `You voted ${myVote} out of 5. (Avg: ${this.ratingAvg})`;
+        this.rating = myVote;
+      }
+      if (!this.alreadyVoted) {
+        this.rating = this.ratingAvg;
+        this.votedString = `The average rating is ${this.ratingAvg} out of 5.`;
+      }
     });
   }
 

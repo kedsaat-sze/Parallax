@@ -33,6 +33,10 @@ export class SharedDataService {
     await addDoc(collection(this.firestore, path), data);
   }
 
+  async addRating(path: string, data: {userId: string, rating: number}) {
+    await addDoc(collection(this.firestore, path), data);
+  }
+
   async  updateRating(path: string, fieldPath: string, value: number) {
     await updateDoc(doc(this.firestore, path), fieldPath, value);
   }
@@ -42,7 +46,7 @@ export class SharedDataService {
   }
 
   getCollectionData(path: string) {
-    return  collectionData(collection(this.firestore, path)) as  Observable<{}[]>
+    return  collectionData(collection(this.firestore, path), {idField: "id"}) as  Observable<{}[]>
   }
 
   getComments(path: string) {
