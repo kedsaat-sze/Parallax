@@ -10,6 +10,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from "@angular/material/input";
 import { MonacoEditorModule } from "ngx-monaco-editor-v2";
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MonacoEditorModule } from "ngx-monaco-editor-v2";
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    ClipboardModule,
+    MatSnackBarModule,
     MonacoEditorModule.forRoot(),
   ]
 })

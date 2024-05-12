@@ -20,12 +20,17 @@
   <a *ngIf="germanPage" aria-label="Sicherheit mobiler Geräte" class="menu-item" routerLink="/mobile_device_security-german" routerLinkActive="active" title="Sicherheit mobiler Geräte">
     Sicherheit mobiler Geräte
   </a>
-  <a *ngIf="socialAuthService.authState | async as socialUser" aria-label="My videos" class="menu-item" routerLink="/my_videos" routerLinkActive="active" title="My vidoes">
+  <a *ngIf="user.loggedIn" aria-label="My videos" class="menu-item" routerLink="/my_videos" routerLinkActive="active" title="My vidoes">
     My videos
   </a>
-  <div class="authed-user-div" *ngIf="socialAuthService.authState | async as socialUser">
-    <p>Hello, {{socialUser.name}}!</p>
-    <p>({{socialUser.email}})</p>
+  <div class="authed-user-div" *ngIf="!user.loggedIn">
+    <button class="menu-item" (click)="login()">
+      <span class="material-symbols-outlined" style="font-weight: 600; color: whitesmoke;">login</span>
+    </button>
+  </div>
+  <div class="authed-user-div" *ngIf="user.loggedIn">
+    <p>Hello {{user.name}}!</p>
+    <p>({{user.email}})</p>
   </div>
 </div>
 

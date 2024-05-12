@@ -1,15 +1,46 @@
 <body style="margin: 0px; display: grid;">
     <h2 style="margin: 4rem 0 0 1rem;">
-        {{header}}
-        <star-rating [rating]="rating" [labelText]="rating.toString()" (starClickChange)="onRate($event.rating)"
-            style="display: inline-block; position: sticky; left: 53vw;">
+        {{header}} video
+        <h5 *ngIf="userId.length === 0" style="display: inline-block; position: sticky; left: 99vw; margin: 0 1rem;">You can rate after login</h5>
+        <button class="my-button" *ngIf="userId.length > 0 && !wantedRate" (click)="wantRate()" style="display: inline-block; position: sticky; left: 99vw; margin: 0 1rem;">Rate this video</button>
+        <star-rating [title]="votedString" *ngIf="userId.length > 0 && wantedRate" [rating]="rating" [labelText]="votedString"
+            (starClickChange)="onRate($event.rating)" style="display: inline-block; position: sticky; left: 99vw;">
         </star-rating>
+        <div style="margin-top: 1rem;">
+            <div style="float: left; width: 60vw; max-width: 176vh">
+                <div id="container" (click)="playOnDiv()" style="margin: 0 1rem 0 1rem;">
+                </div>
+                <div id="audio-div">
+                    <audio id="my-audio" controls (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata"
+                    style=" bottom: 0px; position: absolute; margin-left: 1rem; width: 60vw !important; max-width: 176vh !important;">
+                    </audio>
+                </div>
+            </div>
+            <div style="width: 37vw; float: right;">
+                <button class="my-button" *ngIf="userId.length > 0 && !wantedComments" (click)="wantComments()" style="display: inline-block; position: sticky; left: 99vw; margin: 0 1rem;">Check the comments!</button>
+                <mat-card *ngIf="userId.length > 0 && wantedComments" class="comment-section">
+                    <p style="font-size: xx-small; margin: 4px !important;">order by newest first</p>
+                    <mat-card-content class="comments-content">
+                        <mat-card *ngFor="let comment of comments; index as i;" [ngClass]="comment.email === emailAddress ? 'my-comment-card' : 'comment-card'">
+                            <p class="comment-data">
+                                {{comment.displayname}} ({{comment.email}}) said at {{toDate(comment.timestamp)}}:
+                            </p>
+                            <p class="comment">
+                                {{comment.comment}}
+                            </p>
+                        </mat-card>
+                    </mat-card-content>
+                    <mat-card-footer class="leave-comment-section">
+                        <mat-form-field class="comment-input">
+                            <textarea matInput id="comment-textarea" required placeholder="Leave a comment" [(ngModel)]="comment" #commentText="ngModel"></textarea>
+                            <mat-error *ngIf="commentText.hasError('required')">
+                                Required to fill!
+                            </mat-error>
+                        </mat-form-field>
+                        <button class="my-button" [disabled]="commentText.invalid" mat-raised-button color="primary" style="position: absolute; right: 1rem; bottom: 3rem;" (click)="writeComment()">Comment</button>
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
     </h2>
-    <div id="container" (click)="playOnDiv()" style="margin: 0 1rem 0 1rem;">
-    </div>
-    <div id="audio-div">
-        <audio id="my-audio" controls (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata"
-        style=" bottom: 0px; position: absolute; margin-left: 1rem; width: 60vw !important; max-width: 176vh !important;">
-        </audio>
-    </div>
 </body>

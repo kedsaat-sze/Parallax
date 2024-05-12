@@ -1,9 +1,10 @@
 <body style="margin: 0px; display: grid;">
   <h1 style="margin-left: 1rem;">{{dialogData.header}}</h1>
-  <div id="container" (click)="playOnDiv()" style="margin: 0 1rem 0 1rem;">
+  <div id="container" (click)="playOnDiv()" style="display: inline-block; position: sticky; margin: 0 1rem;">
   </div>
   <div id="audio-div">
-      <audio id="my-audio" controls style=" bottom: 0px; width: 1200px; position: absolute; margin-left: 1rem;" (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata">
-      </audio>
+      <audio id="my-audio" controls (play)="animateFunc()" (pause)="animateFunc()" (ratechange)="rateChange()" preload="metadata"
+        style=" bottom: 0px; position: absolute; margin-left: 1rem; width: 60vw !important; max-width: 176vh !important;">
+        </audio>
   </div>
 </body>
