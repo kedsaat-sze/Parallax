@@ -100,12 +100,10 @@ export class SharedVideosComponent {
   wantRate() {
     this.wantedRate = true;
     this.sharedData$!.subscribe(data => {
-      console.log(data);
       let sum = 0;
       let count = 0;
       let myVote = undefined;
       data.forEach((elem) => {
-        console.log(elem);
         if (elem.userId === this.userId) {
           myVote = elem.rating;
           this.myRatingDocumentId = elem.id;
