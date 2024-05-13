@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, authState } from "@angular/fire/auth";
-import { doc, docData, DocumentReference, Firestore, getDoc, setDoc, updateDoc, collection, addDoc, deleteDoc, collectionData, Timestamp, FieldValue, query } from  "@angular/fire/firestore";
+import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query } from  "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { limit, orderBy } from "firebase/firestore";
-import { Observable, filter, map, timestamp } from "rxjs";
+import { Observable, filter, map } from "rxjs";
 
 export interface MyComment {
   userId: string;
