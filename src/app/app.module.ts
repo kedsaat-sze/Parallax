@@ -66,7 +66,6 @@ import { MatInputModule } from "@angular/material/input";
   ],
   providers: [
     AngularDeviceInformationService,
-    //AuthGuard, { provide: FIREBASE_OPTIONS, useValue: environment }    
   ],
   bootstrap: [AppComponent]
 })
