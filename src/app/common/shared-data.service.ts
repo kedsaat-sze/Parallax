@@ -52,7 +52,7 @@ export class SharedDataService {
     await deleteObject(audioRef);
   }
 
-  async createAnimation(path: string, json: File, audio: File) {
+  async createAnimation(path: string, json: ArrayBuffer, audio: ArrayBuffer) {
     const jsonRef = ref(this.storage, `${path}${json}`);
     const audioRef = ref(this.storage, `${path}${audio}`);
     await uploadBytesResumable(jsonRef, json);
