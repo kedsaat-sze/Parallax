@@ -46,7 +46,6 @@ export class SharedDataService {
   async deleteAnimationData(path: string, animationPath: string) {
     const  docRef = doc(this.firestore, path);
     const pathRef = ref(this.storage, animationPath);
-    console.log(pathRef);
     await  deleteDoc(docRef);
     await deleteObject(pathRef);
   }
