@@ -92,7 +92,7 @@ export class MyVideosComponent implements OnInit {
   }
 
   onDelete(element: Video) {
-    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`, `gs://sbox-parallax/users/${this.email}/vid_${element.name}/`);
+    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`, `gs://sbox-parallax.app/users/${this.email}/vid_${element.name}/${element.name}.json`, `gs://sbox-parallax/users/${this.email}/vid_${element.name}/${element.audio?.split("/").pop()}`);
     /*this.http.delete<any>(`${globalVariables.bucketUrlPrefix}users/${this.email.replace("@","%40")}/vid_${element.name}/`)
     .subscribe({
       next: (data) => {

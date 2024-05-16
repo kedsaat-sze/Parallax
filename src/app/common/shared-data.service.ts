@@ -43,11 +43,13 @@ export class SharedDataService {
     await updateDoc(doc(this.firestore, path), fieldPath, value);
   }
 
-  async deleteAnimationData(path: string, animationPath: string) {
+  async deleteAnimationData(path: string, json: string, audio: string) {
     const  docRef = doc(this.firestore, path);
-    const pathRef = ref(this.storage, animationPath);
+    const jsonRef = ref(this.storage, json);
+    const audioRef = ref(this.storage, audio);
     await  deleteDoc(docRef);
-    await deleteObject(pathRef);
+    await deleteObject(jsonRef);
+    await deleteObject(audioRef);
   }
 
   getDocData(path: string) {
