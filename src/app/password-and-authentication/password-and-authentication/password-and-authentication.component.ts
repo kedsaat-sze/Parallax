@@ -26,7 +26,7 @@ export class PasswordAndAuthenticationComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-pw-and-auth-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -68,7 +68,7 @@ export class PasswordAndAuthenticationComponent {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-pw-and-auth-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 

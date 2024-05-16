@@ -26,7 +26,7 @@ export class PhishingComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-phishing-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/audio/phishing${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -68,7 +68,7 @@ export class PhishingComponent implements OnInit {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-phishing-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 }

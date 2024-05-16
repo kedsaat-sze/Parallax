@@ -31,7 +31,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
       this.client = params["client"] || "";
       this.name = params["name"] || "";
     });
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-mobile-device-security-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -78,7 +78,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-mobile-device-security-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 

@@ -55,7 +55,7 @@ export class SharedDataService {
   async createAnimation(path: string, json: File, audio: File) {
     const jsonRef = ref(this.storage, `${path}${json.name}`);
     const audioRef = ref(this.storage, `${path}${audio.name}`);
-    await uploadBytes(jsonRef, json);
+    await uploadBytesResumable(jsonRef, json);
     await uploadBytesResumable(audioRef, audio);
     uploadBytes
   }

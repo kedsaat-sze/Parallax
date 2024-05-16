@@ -25,7 +25,7 @@ export class PasswordSecurityComponent {
   }
 
   ngOnInit(): void {
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-pw-security-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -67,7 +67,7 @@ export class PasswordSecurityComponent {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-pw-security-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 }

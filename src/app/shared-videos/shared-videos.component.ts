@@ -53,7 +53,7 @@ export class SharedVideosComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-shared-videos-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}users/${this.emailAddress}/vid_${this.videoName}/${this.audioName}`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -85,7 +85,7 @@ export class SharedVideosComponent {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-shared-videos-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 

@@ -28,7 +28,7 @@ export class DialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.audio = document.getElementById('my-audio') as HTMLAudioElement;
+    this.audio = document.getElementById('my-dialog-audio') as HTMLAudioElement;
     this.audio.src = `${globalVariables.bucketUrlPrefix}${this.dialogData.audioName}`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
@@ -60,7 +60,7 @@ export class DialogComponent implements OnInit {
   }
 
   rateChange() {
-    this.audio = document.getElementById("my-audio") as HTMLAudioElement;
+    this.audio = document.getElementById("my-dialog-audio") as HTMLAudioElement;
     this.audio!.playbackRate = 1;
   }
 
