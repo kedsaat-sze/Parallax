@@ -92,9 +92,8 @@ export class MyVideosComponent implements OnInit {
   }
 
   onDelete(element: Video) {
-    console.log(`${globalVariables.bucketObjectPrefix}${element.name}`);
-    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`);
-    this.http.delete<any>(`${globalVariables.bucketUrlPrefix}users/${this.email.replace("@","%40")}/vid_${element.name}/`)
+    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`, `users/${this.email}/vid_${element.name}/`);
+    /*this.http.delete<any>(`${globalVariables.bucketUrlPrefix}users/${this.email.replace("@","%40")}/vid_${element.name}/`)
     .subscribe({
       next: (data) => {
         console.log("Deleted successfully");
@@ -103,7 +102,7 @@ export class MyVideosComponent implements OnInit {
       error: (err) => {
         console.log("Error occured while fetching data: " + err.message);
       }
-    });
+    });*/
   }
 
   formatJSON() {

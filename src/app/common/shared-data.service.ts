@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, authState } from "@angular/fire/auth";
 import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query, deleteDoc } from  "@angular/fire/firestore";
+import { Storage, deleteObject, ref } from '@angular/fire/storage';
 import { Router } from "@angular/router";
 import { limit, orderBy } from "firebase/firestore";
 import { Observable, filter, map } from "rxjs";
@@ -24,6 +25,7 @@ export class SharedDataService {
   auth: Auth = inject(Auth);
   user$ = authState(this.auth).pipe(filter(user  =>  user !== null), map(user  =>  user!));
   router: Router = inject(Router);
+  private readonly storage: Storage = inject(Storage);
 
   get userId() { return SharedDataService.userId; }
   get displayName() { return SharedDataService.displayName; }
@@ -41,9 +43,12 @@ export class SharedDataService {
     await updateDoc(doc(this.firestore, path), fieldPath, value);
   }
 
-  async deleteAnimationData(path: string) {
-    const  ref = doc(this.firestore, path);
-    await  deleteDoc(ref);
+  async deleteAnimationData(path: string, animationPath: string) {
+    const  docRef = doc(this.firestore, path);
+    const pathRef = ref(this.storage, animationPath);
+    console.log(pathRef);
+    await  deleteDoc(docRef);
+    await deleteObject(pathRef);
   }
 
   getDocData(path: string) {
