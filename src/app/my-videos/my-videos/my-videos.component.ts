@@ -50,7 +50,7 @@ export class MyVideosComponent implements OnInit {
     let file: File = new File([this.JSONFile], `${form.value.name}.json`, {type: "application/json"});
     /*this.uploadFile(file, form);
     this.uploadFile(this.selectedFile!, form);*/
-    const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${form.value.name.name}/`;
+    const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${form.value.name}/`;
     await this.sharedDataService.createAnimation(objectPaths,file, this.selectedFile!);
     this.resetForm(form);
     this.getVideos();
