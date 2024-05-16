@@ -46,22 +46,24 @@ export class MyVideosComponent implements OnInit {
   }
 
 
-  videoSubmit(form: NgForm) {
+  async videoSubmit(form: NgForm) {
     let file: File = new File([this.JSONFile], `${form.value.name}.json`, {type: "application/json"});
-    this.uploadFile(file, form);
-    this.uploadFile(this.selectedFile!, form);
+    /*this.uploadFile(file, form);
+    this.uploadFile(this.selectedFile!, form);*/
+    const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${form.value.name.name}/`;
+    await this.sharedDataService.createAnimation(objectPaths,file, this.selectedFile!);
     this.resetForm(form);
     this.getVideos();
   }
 
-  uploadFile(file: File, form: NgForm) {
+  /*uploadFile(file: File, form: NgForm) {
     this.http.post<any>(
       `${globalVariables.bucketObjectPrefixWithoutSlash}?name=users/${localStorage.getItem("useremail")}/vid_${form.value.name}/${file.name}`,
       file,
-      /**{headers: {
+      {headers: {
         "Content-Type": file.type,
         "Authorization": `Bearer ${this.accessToken}`,
-      }}*/
+      }}
     )
     .subscribe({
       next: () => {
@@ -71,7 +73,7 @@ export class MyVideosComponent implements OnInit {
         console.log(`Error occured while adding ${file.name}: ${err.message}`);
       }
     });
-  }
+  }*/
 
   async onCopy(element: Video) {
     this._snackBar.open("Copied to clipboard!");

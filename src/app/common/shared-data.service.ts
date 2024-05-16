@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, authState } from "@angular/fire/auth";
 import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query, deleteDoc } from  "@angular/fire/firestore";
-import { Storage, deleteObject, ref } from '@angular/fire/storage';
+import { Storage, deleteObject, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { Router } from "@angular/router";
 import { limit, orderBy } from "firebase/firestore";
 import { Observable, filter, map } from "rxjs";
@@ -50,6 +50,13 @@ export class SharedDataService {
     await  deleteDoc(docRef);
     await deleteObject(jsonRef);
     await deleteObject(audioRef);
+  }
+
+  async createAnimation(path: string, json: File, audio: File) {
+    const jsonRef = ref(this.storage, `${path}${json}`);
+    const audioRef = ref(this.storage, `${path}${audio}`);
+    await uploadBytesResumable(jsonRef, json);
+    await uploadBytesResumable(audioRef, audio);
   }
 
   getDocData(path: string) {
