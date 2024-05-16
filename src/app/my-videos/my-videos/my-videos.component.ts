@@ -92,17 +92,9 @@ export class MyVideosComponent implements OnInit {
   }
 
   onDelete(element: Video) {
-    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`, `gs://sbox-parallax/users/${this.email}/vid_${element.name}/${element.name}.json`, `gs://sbox-parallax/users/${this.email}/vid_${element.name}/${element.audio?.split("/").pop()}`);
-    /*this.http.delete<any>(`${globalVariables.bucketUrlPrefix}users/${this.email.replace("@","%40")}/vid_${element.name}/`)
-    .subscribe({
-      next: (data) => {
-        console.log("Deleted successfully");
-        this.getVideos();
-      },
-      error: (err) => {
-        console.log("Error occured while fetching data: " + err.message);
-      }
-    });*/
+    const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${element.name}/`;
+    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`, `${objectPaths}${element.name}.json`, `${objectPaths}${element.audio?.split("/").pop()}`);
+    this.getVideos();
   }
 
   formatJSON() {
