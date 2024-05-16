@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, authState } from "@angular/fire/auth";
-import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query } from  "@angular/fire/firestore";
+import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query, deleteDoc } from  "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { limit, orderBy } from "firebase/firestore";
 import { Observable, filter, map } from "rxjs";
@@ -39,6 +39,11 @@ export class SharedDataService {
 
   async  updateRating(path: string, fieldPath: string, value: number) {
     await updateDoc(doc(this.firestore, path), fieldPath, value);
+  }
+
+  async deleteAnimationData(path: string) {
+    const  ref = doc(this.firestore, path);
+    await  deleteDoc(ref);
   }
 
   getDocData(path: string) {

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, inject } from '@angular/core';
 import { globalVariables } from "../common/global_variables";
 import { ActivatedRoute } from "@angular/router";
-import { handleData } from "../common/create-animation.function";
+import { AnimationPlayer, handleData } from "../common/create-animation.function";
 import { Observable } from "rxjs";
 import { MyComment, SharedDataService } from "../common/shared-data.service";
 
@@ -16,7 +16,7 @@ export class SharedVideosComponent {
   videoName: string = "";
   emailAddress: string = "";
   audioName: string = "";
-  animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
+  animationPlayers: AnimationPlayer[] = [];
   audio: HTMLAudioElement | undefined;
   header: string = "";
   rating: number = 0;

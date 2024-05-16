@@ -1,48 +1,72 @@
 import { globalVariables } from "./global_variables";
 
-export function handleData(data: any, nameOption?: boolean): {animationPlayer: Animation, elementId: string}[] {
-    let animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
+export interface AnimationPlayer {
+    animationPlayer: Animation,
+    elementId: string
+}
+
+export interface Transform {
+    percent: number,
+    transform: string,
+    scale: number,
+    rotate: number,
+    opacity: number,
+    position: {
+        x: number,
+        y: number
+    }
+}
+
+export interface Picture {
+    resource: string;
+    transform: Transform[]
+}
+
+export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
+    let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
-        data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
-            movie.description.background != null ? animationPlayers.push(createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s background is null`);
+        data.movie.forEach((scene: { description: { background: Picture | null; screen: Picture | null;
+        midground: Picture | null; foreground: Picture | null; }; name: any; from_time: any; animation_time: any; }) => {
+            scene.description.background != null ? animationPlayers.push(createImage(scene.name, "background", scene.description.background.resource,
+            scene.description.background.transform, scene.from_time, scene.animation_time)) : console.log(`${scene.name}'s background is null`);
             let screenResource = "";
-            if (movie.description.screen !== null) {
-                let position = movie.description.screen.resource.indexOf(".png");
-                screenResource = movie.description.screen.resource.substring(0, position) + `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` + movie.description.screen.resource.substring(position);
+            if (scene.description.screen !== null) {
+                let position = scene.description.screen.resource.indexOf(".png");
+                screenResource = scene.description.screen.resource.substring(0, position) + `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` +
+                scene.description.screen.resource.substring(position);
             }
-            movie.description.screen != null ? animationPlayers.push(createImage(movie.name, "screen", screenResource, movie.description.screen.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s screen is null`);
-            movie.description.midground != null ? animationPlayers.push(createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s midground is null`);
-            movie.description.foreground != null ? animationPlayers.push(createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s foreground is null`);
+            scene.description.screen != null ?
+                animationPlayers.push(createImage(scene.name, "screen", screenResource, scene.description.screen.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s screen is null`);
+            scene.description.midground != null ?
+                animationPlayers.push(createImage(scene.name, "midground", scene.description.midground.resource, scene.description.midground.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s midground is null`);
+            scene.description.foreground != null ?
+                animationPlayers.push(createImage(scene.name, "foreground", scene.description.foreground.resource, scene.description.foreground.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s foreground is null`);
         });
     } else {
-        data.movie.forEach((movie: { description: { background: { resource: any; transform: any; } | null; screen: { resource: any; transform: any; } | null; midground: { resource: any; transform: any; } | null; foreground: { resource: any; transform: any; } | null; }; name: any; from_time: any; animation_time: any; }) => {
-            movie.description.background != null ? animationPlayers.push(createImage(movie.name, "background", movie.description.background.resource, movie.description.background.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s background is null`);
-            movie.description.screen != null ? animationPlayers.push(createImage(movie.name, "screen", movie.description.screen.resource, movie.description.screen.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s screen is null`);
-            movie.description.midground != null ? animationPlayers.push(createImage(movie.name, "midground", movie.description.midground.resource, movie.description.midground.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s midground is null`);
-            movie.description.foreground != null ? animationPlayers.push(createImage(movie.name, "foreground", movie.description.foreground.resource, movie.description.foreground.transform, movie.from_time, movie.animation_time)) : console.log(`${movie.name}'s foreground is null`);
+        data.movie.forEach((scene: { description: { background: Picture | null; screen: Picture | null;
+        midground: Picture | null; foreground: Picture | null; }; name: any; from_time: any; animation_time: any; }) => {
+            scene.description.background != null ?
+                animationPlayers.push(createImage(scene.name, "background", scene.description.background.resource, scene.description.background.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s background is null`);
+            scene.description.screen != null ?
+                animationPlayers.push(createImage(scene.name, "screen", scene.description.screen.resource, scene.description.screen.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s screen is null`);
+            scene.description.midground != null ?
+                animationPlayers.push(createImage(scene.name, "midground", scene.description.midground.resource, scene.description.midground.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s midground is null`);
+            scene.description.foreground != null ?
+                animationPlayers.push(createImage(scene.name, "foreground", scene.description.foreground.resource, scene.description.foreground.transform, scene.from_time, scene.animation_time)) :
+                console.log(`${scene.name}'s foreground is null`);
         });
     }
     
     return animationPlayers;
 }
 
-export function createImage(
-    scene: string,
-    id: string,
-    resource: string,
-    transform: {
-        percent: number,
-        transform: string,
-        scale: number,
-        rotate: number,
-        opacity: number,
-        position: {
-            x: number,
-            y: number
-        }
-    }[],
-    fromTime: number,
-    animationTime: number): {animationPlayer: Animation, elementId: string} {
+export function createImage( scene: string, id: string, resource: string, transform: Transform[], fromTime: number, animationTime: number): AnimationPlayer {
         let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
         var container = document.getElementById("container");
         container!.insertAdjacentHTML('beforeend',imageTag);
@@ -84,4 +108,4 @@ export function createImage(
         animationPlayer.pause();
         //this.animationPlayers.push({animationPlayer: animationPlayer, elementId: `${scene}-${id}`});
         return {animationPlayer: animationPlayer, elementId: `${scene}-${id}`};
-  }
+}

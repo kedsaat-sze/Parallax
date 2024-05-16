@@ -9,8 +9,6 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class HomeComponent {
   name: string = "";
-  animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
-  audio: HTMLAudioElement | undefined;
   client = "";
 
   constructor(private route: ActivatedRoute) {

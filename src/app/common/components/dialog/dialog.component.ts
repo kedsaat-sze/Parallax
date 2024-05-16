@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { HttpClient } from "@angular/common/http";
 import { globalVariables } from "../../global_variables";
-import { handleData } from "../../create-animation.function";
+import { AnimationPlayer, handleData } from "../../create-animation.function";
 
 export interface IDialogData {
   header?: string;
@@ -17,10 +17,7 @@ export interface IDialogData {
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  videoName: string = "";
-  emailAddress: string = "";
-  audioName: string = "";
-  animationPlayers: {animationPlayer: Animation, elementId: string}[] = [];
+  animationPlayers: AnimationPlayer[] = [];
   audio: HTMLAudioElement | undefined;
 
   constructor(

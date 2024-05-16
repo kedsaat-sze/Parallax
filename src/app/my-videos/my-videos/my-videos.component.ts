@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { globalVariables } from "../../common/global_variables";
 import defaultJson from "../../../assets/default_movie_description.json";
@@ -30,6 +30,7 @@ export class MyVideosComponent implements OnInit {
   selectedFile: File | undefined;
   selectedVideo: Video | undefined;
   get email() { return SharedDataService.email; }
+  sharedDataService = inject(SharedDataService);
 
   constructor(
     private http: HttpClient,
@@ -39,7 +40,7 @@ export class MyVideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayedColumns = ["name", "play", "copy"];
+    this.displayedColumns = ["name", "play", "copy", "delete"];
     this.getVideos();
     this.loadDefaultJSON();
   }
@@ -88,6 +89,21 @@ export class MyVideosComponent implements OnInit {
         localStorage.getItem("useremail") || undefined
       )
     );
+  }
+
+  onDelete(element: Video) {
+    console.log(`${globalVariables.bucketObjectPrefix}${element.name}`);
+    this.sharedDataService.deleteAnimationData(`sharedvideos/${this.email}'s "${element.name}"`);
+    this.http.delete<any>(`${globalVariables.bucketUrlPrefix}users/${this.email.replace("@","%40")}/vid_${element.name}/`)
+    .subscribe({
+      next: (data) => {
+        console.log("Deleted successfully");
+        this.getVideos();
+      },
+      error: (err) => {
+        console.log("Error occured while fetching data: " + err.message);
+      }
+    });
   }
 
   formatJSON() {

@@ -32,6 +32,20 @@
                 </div>
             </td>
         </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef class="action-cell"> Delete </th>
+            <td mat-cell class="action-cell" *matCellDef="let element">
+                <div class="example-button-container">
+                    <button mat-mini-fab (click)="onDelete(element)">
+                        <mat-icon matTooltip="Delete animation">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
