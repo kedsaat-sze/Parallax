@@ -41,6 +41,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
         }
       }
     }
+    this.audio.src = URL.createObjectURL(audioFile!);
     let json: Blob;
     try {
       json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`);
