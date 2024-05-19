@@ -89,8 +89,8 @@ export async function asyncHandleData(data: Movie, nameOption?: boolean): Promis
     let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach(async (scene: Scene) => {
-            scene.description.background != null ? animationPlayers.push(await createImage(scene.name, "background")) :
-                console.log(`${scene.name}'s background is null`);
+            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background")) :
+                console.log(`${scene}'s background is null`);
             let screenResource = "";
             if (scene.description.screen !== null) {
                 let position = scene.description.screen.resource.indexOf(".png");
@@ -99,23 +99,23 @@ export async function asyncHandleData(data: Movie, nameOption?: boolean): Promis
                     `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` +
                     scene.description.screen.resource.substring(position);
             }
-            scene.description.screen != null ? animationPlayers.push(await createImage(scene.name, "screen")) :
-                console.log(`${scene.name}'s screen is null`);
-            scene.description.midground != null ? animationPlayers.push(await createImage(scene.name, "midground")) :
-                console.log(`${scene.name}'s midground is null`);
-            scene.description.foreground != null ? animationPlayers.push(await createImage(scene.name, "foreground")) :
-                console.log(`${scene.name}'s foreground is null`);
+            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen")) :
+                console.log(`${scene}'s screen is null`);
+            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground")) :
+                console.log(`${scene}'s midground is null`);
+            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground")) :
+                console.log(`${scene}'s foreground is null`);
         });
     } else {
         data.movie.forEach(async (scene: Scene) => {
-            scene.description.background != null ? animationPlayers.push(await createImage(scene.name, "background")) :
-                console.log(`${scene.name}'s background is null`);
-            scene.description.screen != null ? animationPlayers.push(await createImage(scene.name, "screen")) :
-                console.log(`${scene.name}'s screen is null`);
-            scene.description.midground != null ? animationPlayers.push(await createImage(scene.name, "midground")) :
-                console.log(`${scene.name}'s midground is null`);
-            scene.description.foreground != null ? animationPlayers.push(await createImage(scene.name, "foreground")) :
-                console.log(`${scene.name}'s foreground is null`);
+            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background")) :
+                console.log(`${scene}'s background is null`);
+            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen")) :
+                console.log(`${scene}'s screen is null`);
+            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground")) :
+                console.log(`${scene}'s midground is null`);
+            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground")) :
+                console.log(`${scene}'s foreground is null`);
         });
     }
     return animationPlayers;
@@ -129,8 +129,8 @@ export async function createImage( scene: Scene, id: string): Promise<AnimationP
     const animationTime: number = scene.animation_time;
     const sharedDataService = inject(SharedDataService);
     //let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
-    let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
-    const imageElement = document.getElementById(`${scene}-${id}`) as HTMLImageElement;
+    let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
+    const imageElement = document.getElementById(`${scene.name}-${id}`) as HTMLImageElement;
     const imageFile = await sharedDataService.getAnimationFile(resource);
     imageElement.src = URL.createObjectURL(imageFile);
     var container = document.getElementById("container");
@@ -161,10 +161,10 @@ export async function createImage( scene: Scene, id: string): Promise<AnimationP
         }
     });
     //add animations to images
-    const animation = new KeyframeEffect(document.getElementById(`${scene}-${id}`),transformation, animationOptions);
+    const animation = new KeyframeEffect(document.getElementById(`${scene.name}-${id}`),transformation, animationOptions);
     const animationPlayer = new Animation(animation);
     animationPlayer.play();
     animationPlayer.pause();
     //this.animationPlayers.push({animationPlayer: animationPlayer, elementId: `${scene}-${id}`});
-    return {animationPlayer: animationPlayer, elementId: `${scene}-${id}`};
+    return {animationPlayer: animationPlayer, elementId: `${scene.name}-${id}`};
 }
