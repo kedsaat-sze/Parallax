@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, authState } from "@angular/fire/auth";
 import { doc, docData, Firestore, updateDoc, collection, addDoc, collectionData, query, deleteDoc } from  "@angular/fire/firestore";
-import { Storage, deleteObject, ref, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
+import { Storage, deleteObject, getBlob, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { Router } from "@angular/router";
 import { limit, orderBy } from "firebase/firestore";
 import { Observable, filter, map } from "rxjs";
@@ -57,7 +57,12 @@ export class SharedDataService {
     const audioRef = ref(this.storage, `${path}${audio.name}`);
     await uploadBytesResumable(jsonRef, json);
     await uploadBytesResumable(audioRef, audio);
-    uploadBytes
+  }
+
+  async getAnimationFile(path: string, name: string): Promise<Blob> {
+    const fileRef = ref(this.storage, `${path}${name}`);
+    const file = await getBlob(fileRef);
+    return file;
   }
 
   getDocData(path: string) {
@@ -69,7 +74,7 @@ export class SharedDataService {
   }
 
   getComments(path: string) {
-    const recentMessagesQuery =  query(collection(this.firestore, path), orderBy("timestamp","desc"), limit(10));
+    const recentMessagesQuery =  query(collection(this.firestore, path), orderBy("timestamp","desc"), limit(100));
     return  collectionData(recentMessagesQuery) as  Observable<{}[]>
   }
 }

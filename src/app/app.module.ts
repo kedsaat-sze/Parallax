@@ -21,6 +21,7 @@ import { getFirestore, connectFirestoreEmulator, provideFirestore } from "@angul
 import { getStorage, connectStorageEmulator, provideStorage } from "@angular/fire/storage";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatInputModule } from "@angular/material/input";
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     StarRatingModule.forRoot(),
     provideFirebaseApp(() =>  initializeApp(environment)),
     provideAuth(() => {

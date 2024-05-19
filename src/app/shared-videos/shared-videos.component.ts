@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AnimationPlayer, handleData } from "../common/create-animation.function";
 import { Observable } from "rxjs";
 import { MyComment, SharedDataService } from "../common/shared-data.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-shared-videos',
@@ -39,6 +40,7 @@ export class SharedVideosComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private _snackBar: MatSnackBar,
   ) {
     this.route.queryParams.subscribe(params => {
       this.emailAddress = params['emailaddress']|| "";
@@ -54,7 +56,20 @@ export class SharedVideosComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-shared-videos-audio') as HTMLAudioElement;
-    this.audio.src = `${globalVariables.bucketUrlPrefix}users/${this.emailAddress}/vid_${this.videoName}/${this.audioName}`;
+    const test = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/`, this.audioName);
+    this.audio.src = URL.createObjectURL(test);
+    this.audio.addEventListener('error', (event)=> {
+      event.preventDefault();
+      this.header = "Error while loading data";
+      }, false
+    );
+    try {
+      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/`, `${this.videoName}.json`);
+      this.animationPlayers = handleData(JSON.parse(await json.text()));
+    } catch (error) {
+      this.header = "Error while loading data";
+    }
+    /*this.audio.src = `${globalVariables.bucketUrlPrefix}users/${this.emailAddress}/vid_${this.videoName}/${this.audioName}`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
       this.header = "Error while loading data";
@@ -65,7 +80,7 @@ export class SharedVideosComponent {
       error: err => {
         this.header = "Error while loading data";
       }
-    });
+    });*/
   }
 
   // Play/pause the animations and set the audio's current time to animations
@@ -90,10 +105,14 @@ export class SharedVideosComponent {
   }
 
   async onRate(rating: number) {
-    if (this.alreadyVoted) {
-      await this.sharedDataService.updateRating(`sharedvideos/${this.header}/ratings/${this.myRatingDocumentId}`, `rating`, rating);
+    if (this.emailAddress !== this.myEmail) {
+      if (this.alreadyVoted) {
+        await this.sharedDataService.updateRating(`sharedvideos/${this.header}/ratings/${this.myRatingDocumentId}`, `rating`, rating);
+      } else {
+        await this.sharedDataService.addRating(`sharedvideos/${this.header}/ratings`, {userId: this.userId, rating: rating});
+      }
     } else {
-      await this.sharedDataService.addRating(`sharedvideos/${this.header}/ratings`, {userId: this.userId, rating: rating});
+      this._snackBar.open("You cannot rate your own video.");
     }
   }
 
@@ -112,14 +131,19 @@ export class SharedVideosComponent {
         count++;
       });
       this.ratingAvg = Number((sum/count).toFixed(3));
-      if (myVote !== undefined) {
-        this.alreadyVoted = true;
-        this.votedString = `You voted ${myVote} out of 5. (Avg: ${this.ratingAvg})`;
-        this.rating = myVote;
-      }
-      if (!this.alreadyVoted) {
+      if (this.emailAddress === this.myEmail) {
+        this.votedString = `The average rating is ${this.ratingAvg | 0} out of 5 (Total: ${count} votes)`;
         this.rating = this.ratingAvg;
-        this.votedString = `The average rating is ${this.ratingAvg} out of 5.`;
+      } else {
+        if (myVote !== undefined) {
+          this.alreadyVoted = true;
+          this.votedString = `You voted ${myVote} out of 5. (Avg: ${this.ratingAvg})`;
+          this.rating = myVote;
+        }
+        if (!this.alreadyVoted) {
+          this.rating = this.ratingAvg;
+          this.votedString = `The average rating is ${this.ratingAvg | 0} out of 5.`;
+        }
       }
     });
   }

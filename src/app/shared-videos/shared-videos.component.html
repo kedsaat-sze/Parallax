@@ -3,7 +3,7 @@
         {{header}} video
         <h5 *ngIf="userId.length === 0" style="display: inline-block; position: sticky; left: 99vw; margin: 0 1rem;">You can rate after login</h5>
         <button class="my-button" *ngIf="userId.length > 0 && !wantedRate" (click)="wantRate()" style="display: inline-block; position: sticky; left: 99vw; margin: 0 1rem;">Rate this video</button>
-        <star-rating [title]="votedString" *ngIf="userId.length > 0 && wantedRate" [rating]="rating" [labelText]="votedString"
+        <star-rating [title]="votedString" *ngIf="userId.length > 0 && wantedRate" [disabled]="emailAddress === myEmail" [rating]="rating" [labelText]="votedString"
             (starClickChange)="onRate($event.rating)" style="display: inline-block; position: sticky; left: 99vw;">
         </star-rating>
         <div style="margin-top: 1rem;">
@@ -21,7 +21,7 @@
                 <mat-card *ngIf="userId.length > 0 && wantedComments" class="comment-section">
                     <p style="font-size: xx-small; margin: 4px !important;">order by newest first</p>
                     <mat-card-content class="comments-content">
-                        <mat-card *ngFor="let comment of comments; index as i;" [ngClass]="comment.email === emailAddress ? 'my-comment-card' : 'comment-card'">
+                        <mat-card *ngFor="let comment of comments; index as i;" [ngClass]="comment.email === myEmail ? 'my-comment-card' : 'comment-card'">
                             <p class="comment-data">
                                 {{comment.displayname}} ({{comment.email}}) said at {{toDate(comment.timestamp)}}:
                             </p>
