@@ -59,8 +59,8 @@ export class SharedDataService {
     await uploadBytesResumable(audioRef, audio);
   }
 
-  async getAnimationFile(path: string, name: string): Promise<Blob> {
-    const fileRef = ref(this.storage, `${path}${name}`);
+  async getAnimationFile(FileFullPath: string): Promise<Blob> {
+    const fileRef = ref(this.storage, `${FileFullPath}`);
     const file = await getBlob(fileRef);
     return file;
   }

@@ -5,4 +5,5 @@ export const globalVariables = {
     bucketObjectPrefixWithoutSlash: "https://storage.googleapis.com/upload/storage/v1/b/sbox-parallax/o",
     bucketObjectPrefix: "https://storage.googleapis.com/storage/v1/b/sbox-parallax/o/",
     gsBucketUrl: "gs://sbox-parallax/users/",
+    gsBucketUrlPrefix: "gs://sbox-parallax/",
 };

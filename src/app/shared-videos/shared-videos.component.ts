@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, inject } from '@angular/core';
 import { globalVariables } from "../common/global_variables";
 import { ActivatedRoute } from "@angular/router";
-import { AnimationPlayer, handleData } from "../common/create-animation.function";
+import { AnimationPlayer, asyncHandleData, handleData } from "../common/create-animation.function";
 import { Observable } from "rxjs";
 import { MyComment, SharedDataService } from "../common/shared-data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -56,16 +56,16 @@ export class SharedVideosComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-shared-videos-audio') as HTMLAudioElement;
-    const test = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/`, this.audioName);
-    this.audio.src = URL.createObjectURL(test);
+    const audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.audioName}`);
+    this.audio.src = URL.createObjectURL(audioFile);
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
       this.header = "Error while loading data";
       }, false
     );
     try {
-      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/`, `${this.videoName}.json`);
-      this.animationPlayers = handleData(JSON.parse(await json.text()));
+      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`);
+      this.animationPlayers = await asyncHandleData(JSON.parse(await json.text()));
     } catch (error) {
       this.header = "Error while loading data";
     }
