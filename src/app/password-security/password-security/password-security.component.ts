@@ -37,11 +37,11 @@ export class PasswordSecurityComponent {
       }, false);
     this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/password_security.json`)
     .subscribe({
-      next: (data) => {this.animationPlayers = handleData(data)},
+      next: (data) => {handleData(data)},
       error: err => {
         this.http.get<any>(`${globalVariables.bucketUrlPrefix}password_security/password_security.json`)
         .subscribe({
-          next: (data) => {this.animationPlayers = handleData(data)},
+          next: (data) => {handleData(data)},
           error: error => {
             this.router.navigate(['/page-not-found']);
           }

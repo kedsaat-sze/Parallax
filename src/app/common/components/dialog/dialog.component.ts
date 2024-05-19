@@ -36,7 +36,7 @@ export class DialogComponent implements OnInit {
       }, false);
     this.http.get<any>(`${globalVariables.bucketUrlPrefix}users/${this.dialogData.emailAddress}/vid_${this.dialogData.videoName}/${this.dialogData.videoName}.json`)
     .subscribe({
-      next: (data) => {this.animationPlayers = handleData(data)},
+      next: (data) => {handleData(data)},
       error: err => {
         this.dialogData.header = "Error while loading data";
       }

@@ -38,11 +38,11 @@ export class PhishingComponent implements OnInit {
       }, false);
     this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}phishing/phishing.json`)
     .subscribe({
-      next: (data) => {this.animationPlayers = handleData(data)},
+      next: (data) => {handleData(data)},
       error: err => {
         this.http.get<any>(`${globalVariables.bucketUrlPrefix}phishing/phishing.json`)
         .subscribe({
-          next: (data) => {this.animationPlayers = handleData(data)},
+          next: (data) => {handleData(data)},
           error: error => {
             this.router.navigate(['/page-not-found']);
           }

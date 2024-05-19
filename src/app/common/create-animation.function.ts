@@ -29,12 +29,16 @@ export interface Scene {
     animation_time: any
 }
 
+export interface Movie {
+    movie: Scene[]
+}
+
 export interface Picture {
     resource: string;
     transform: Transform[]
 }
 
-export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
+export function handleData(data: Movie, nameOption?: boolean) {
     let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach((scene: Scene) => {
@@ -55,8 +59,7 @@ export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
                 animationPlayers.push(createImage(scene, "foreground", scene.description.foreground)) : console.log(`${scene.name}'s foreground is null`);
         });
     } else {
-        data.movie.forEach((scene: { description: { background: Picture | null; screen: Picture | null;
-        midground: Picture | null; foreground: Picture | null; }; name: any; from_time: any; animation_time: any; }) => {
+        data.movie.forEach((scene: Scene) => {
             scene.description.background != null ?
                 animationPlayers.push(createImage(scene, "background", scene.description.background)) : console.log(`${scene.name}'s background is null`);
             scene.description.screen != null ?
@@ -67,49 +70,27 @@ export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
                 animationPlayers.push(createImage(scene, "foreground", scene.description.foreground)) : console.log(`${scene.name}'s foreground is null`);
         });
     }
-    
-    return animationPlayers;
 }
 
 export function createImage( scene: Scene, id: string, picture: Picture): AnimationPlayer {
-    const resource = picture.resource;
-    const transform = picture.transform;
-    const fromTime = scene.from_time;
-    const animationTime = scene.animation_time;
-    let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
+    let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" src=\"${picture.resource}\" width=\"1200\" height=\"675\" alt=\"${scene.name}-${id}\" />`;
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);
     const animationOptions: KeyframeEffectOptions = {
-        duration: animationTime*1000,
+        duration: scene.animation_time*1000,
         fill: "both",
         easing: "linear",
-        delay: fromTime*1000
+        delay: scene.from_time*1000
     };
     let transformation: Keyframe[] = [];
-    transform.forEach((item) => {
+    picture.transform.forEach((item) => {
         transformation.push({
             transform: item.transform.length > 0 ? item.transform : "",
             scale: item.scale,
             translate: `${item.position.x}px ${item.position.y}px`,
             opacity: item.opacity,
             offset: item.percent === 0 ? 0 : item.percent/100
-            });
-        /*if (item.transform.length > 0) {
-            transformation.push({
-            transform: item.transform,
-            scale: item.scale,
-            translate: `${item.position.x}px ${item.position.y}px`,
-            opacity: item.opacity,
-            offset: item.percent === 0 ? 0 : item.percent/100
-            });
-        } else {
-            transformation.push({
-            scale: item.scale,
-            opacity: item.opacity,
-            translate: `${item.position.x}px ${item.position.y}px`,
-            offset: item.percent === 0 ? 0 : item.percent/100
-            });
-        }*/
+        });
     });
     const animation = new KeyframeEffect(document.getElementById(`${scene.name}-${id}`),transformation, animationOptions);
     const animationPlayer = new Animation(animation);

@@ -17,7 +17,7 @@ export class SharedVideosComponent {
   videoName: string = "";
   emailAddress: string = "";
   audioName: string = "";
-  animationPlayers: AnimationPlayer[] = [];
+  //animationPlayers: AnimationPlayer[] = [];
   audio: HTMLAudioElement | undefined;
   header: string = "";
   rating: number = 0;
@@ -65,7 +65,7 @@ export class SharedVideosComponent {
     );
     try {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`);
-      this.animationPlayers = handleData(JSON.parse(await json.text()));
+      handleData(JSON.parse(await json.text()));
     } catch (error) {
       this.header = "Error while loading data";
     }

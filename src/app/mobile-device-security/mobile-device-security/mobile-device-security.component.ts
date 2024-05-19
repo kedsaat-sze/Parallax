@@ -43,11 +43,11 @@ export class MobileDeviceSecurityComponent implements OnInit {
       }, false);
     this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
     .subscribe({
-      next: (data) => {this.animationPlayers = handleData(data, true)},
+      next: (data) => {handleData(data, true)},
       error: err => {
         this.http.get<any>(`${globalVariables.bucketUrlPrefix}mobile_device_security/mobile_device_security.json`)
         .subscribe({
-          next: (data) => {this.animationPlayers = handleData(data, true)},
+          next: (data) => {handleData(data, true)},
           error: error => {
             this.router.navigate(['/page-not-found']);
           }
