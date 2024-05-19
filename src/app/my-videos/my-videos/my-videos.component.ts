@@ -87,14 +87,6 @@ export class MyVideosComponent implements OnInit {
     } catch (error) {
       console.log("Error occured while fetching data: " + error);
     }
-    this.http.get(`${globalVariables.bucketObjectPrefix}${element.json}`).subscribe({
-      next: (data) => {
-        this.JSONFile = JSON.stringify(data, null, 4);
-      },
-      error: (err) => {
-        console.log("Error occured while fetching data: " + err.message);
-      }
-    });
   }
 
   onDelete(element: Video) {
