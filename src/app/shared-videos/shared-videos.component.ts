@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { globalVariables } from "../common/global_variables";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { handleData } from "../common/create-animation.function";
 import { Observable } from "rxjs";
 import { MyComment, SharedDataService } from "../common/shared-data.service";
@@ -38,6 +38,7 @@ export class SharedVideosComponent {
   constructor(
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
       this.emailAddress = params['emailaddress']|| "";
@@ -53,18 +54,18 @@ export class SharedVideosComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-shared-videos-audio') as HTMLAudioElement;
-    const audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.audioName}`);
-    this.audio.src = URL.createObjectURL(audioFile);
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.header = "Error while loading data";
-      }, false
-    );
+    let audioFile: Blob;
+    try {
+      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.audioName}`);
+    } catch (error) {
+      this.router.navigate(['/page-not-found']);
+    }
+      this.audio.src = URL.createObjectURL(audioFile!);
     try {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`);
       handleData(JSON.parse(await json.text()));
     } catch (error) {
-      this.header = "Error while loading data";
+      this.router.navigate(['/page-not-found']);
     }
   }
 

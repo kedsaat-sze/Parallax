@@ -1,9 +1,9 @@
-import { HttpClient } from "@angular/common/http";
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
 import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
+import { SharedDataService } from "../../../app/common/shared-data.service";
 
 @Component({
   selector: 'app-password-and-authentication',
@@ -12,11 +12,11 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class PasswordAndAuthenticationComponent {
   name: string = "";
-
   audio: HTMLAudioElement | undefined;
   client = "";
+  sharedDataService = inject(SharedDataService);
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.client = params['client']|| "";
       this.name = params['name'] || "";
@@ -27,28 +27,33 @@ export class PasswordAndAuthenticationComponent {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-pw-and-auth-audio') as HTMLAudioElement;
-    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication.mp3`;
-      }, false);
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.audio!.src = `${globalVariables.bucketUrlPrefix}password_and_authentication/audio/password_and_authentication.mp3`;
-      }, false);
-    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/password_and_authentication.json`)
-    .subscribe({
-      next: (data) => {handleData(data, true)},
-      error: err => {
-        this.http.get<any>(`${globalVariables.bucketUrlPrefix}password_and_authentication/password_and_authentication.json`)
-        .subscribe({
-          next: (data) => {handleData(data, true)},
-          error: error => {
-            this.router.navigate(['/page-not-found']);
-          }
-        });
+    let audioFile: Blob;
+    try {
+      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`);
+    } catch (error) {
+      try {
+        audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/audio/password_and_authentication.mp3`);
+      } catch (error) {
+        try {
+          audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}password_and_authentication/audio/password_and_authentication.mp3`);
+        } catch (error) {
+          this.router.navigate(['/page-not-found']);
+        }
       }
-    });
+    }
+    this.audio.src = URL.createObjectURL(audioFile!);
+    let json: Blob;
+    try {
+      json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_and_authentication/password_and_authentication.json`);
+      handleData(JSON.parse(await json.text()), true);
+    } catch (error) {
+      try {
+        json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}password_and_authentication/password_and_authentication.json`);
+        handleData(JSON.parse(await json.text()), true);
+      } catch (error) {
+        this.router.navigate(['/page-not-found']);
+      }
+    }
   }
 
   // Play/pause the animations and set the audio's current time to animations

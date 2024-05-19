@@ -18,23 +18,23 @@ export class TransformatorComponent implements OnInit {
   skewY = 0;
 
   backgroundElement: HTMLImageElement | null = document.getElementById("background") as HTMLImageElement;
-  pistaElement: HTMLImageElement | null = document.getElementById("pista") as HTMLImageElement;
+  screenElement: HTMLImageElement | null = document.getElementById("screen") as HTMLImageElement;
   transformValue: string = "-";
 
   constructor() { }
 
   ngOnInit(): void {
     this.setDefaultValue();
-    this.pistaElement = document.getElementById("pista") as HTMLImageElement;
+    this.screenElement = document.getElementById("screen") as HTMLImageElement;
     this.backgroundElement = document.getElementById("background") as HTMLImageElement;
   }
 
-  selectPista(event: any) {
+  selectScreen(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.pistaElement!.src = e.target.result;
+        this.screenElement!.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
@@ -67,7 +67,7 @@ export class TransformatorComponent implements OnInit {
 
   transformGenerate() {
     // A transform tulajdonság értékének generálása
-    this.pistaElement!.style.transform = `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg) scaleX(${this.scaleX}) scaleY(${this.scaleY}) scaleZ(${this.scaleZ}) translateX(${this.translateX}%) translateY(${this.translateY}%) skewX(${this.skewX}deg) skewY(${this.skewY}deg)`;
-      this.transformValue = `transform: ${this.pistaElement!.style.transform}`;
+    this.screenElement!.style.transform = `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg) scaleX(${this.scaleX}) scaleY(${this.scaleY}) scaleZ(${this.scaleZ}) translateX(${this.translateX}%) translateY(${this.translateY}%) skewX(${this.skewX}deg) skewY(${this.skewY}deg)`;
+      this.transformValue = `transform: ${this.screenElement!.style.transform}`;
   }
 }

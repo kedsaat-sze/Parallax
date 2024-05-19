@@ -51,16 +51,14 @@
         <br>
         <input type="range" name="skewY" min="-35" max="35" step="0.01" value="0" #skew_y=ngModel [(ngModel)]="skewY" (ngModelChange)="transformGenerate()">
         <hr class="solid">
-        <!--button id="pistaBtn" (change)="selectPista($event)">Select Screen</button>
-        <button id="backgroundBtn" (change)="selectBackground($event)">Select Background</button-->
-        <label for="pistaInput">Screen: <input type="file" id="pistaInput" (change)="selectPista($event)"></label>
-        
+
+        <label for="screenInput">Screen: <input type="file" id="screenInput" (change)="selectScreen($event)"></label>
         <label for="backgroundInput">BG: <input type="file" id="backgroundInput" (change)="selectBackground($event)"></label>
         <hr class="solid">
         <span id="transformValue">Transform: {{transformValue}} </span>
     </div>
     <div id="container">
-        <img src="" id="pista" style="border-style: groove;">
+        <img src="" id="screen" style="border-style: groove;">
         <img src="" id="background">
     </div>
 </div>

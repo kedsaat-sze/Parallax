@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
 import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
-import { SharedDataService } from "src/app/common/shared-data.service";
+import { SharedDataService } from "../../../app/common/shared-data.service";
 
 @Component({
   selector: 'app-mobile-device-security',
@@ -54,28 +54,6 @@ export class MobileDeviceSecurityComponent implements OnInit {
         this.router.navigate(['/page-not-found']);
       }
     }
-    /*this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`;
-      }, false);
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.audio!.src = `${globalVariables.bucketUrlPrefix}mobile_device_security/audio/mobile-device-security.mp3`;
-      }, false);
-    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`)
-    .subscribe({
-      next: (data) => {handleData(data, true)},
-      error: err => {
-        this.http.get<any>(`${globalVariables.bucketUrlPrefix}mobile_device_security/mobile_device_security.json`)
-        .subscribe({
-          next: (data) => {handleData(data, true)},
-          error: error => {
-            this.router.navigate(['/page-not-found']);
-          }
-        });
-      }
-    });*/
   }
 
   // Play/pause the animations and set the audio's current time to animations

@@ -1,9 +1,9 @@
-import { HttpClient } from "@angular/common/http";
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { globalVariables } from "../../common/global_variables";
 import { ActivatedRoute, Router } from "@angular/router";
 import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
+import { SharedDataService } from "src/app/common/shared-data.service";
 
 @Component({
   selector: 'app-password-security',
@@ -12,11 +12,11 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class PasswordSecurityComponent {
   name: string = "";
-
   audio: HTMLAudioElement | undefined;
   client = "";
+  sharedDataService = inject(SharedDataService);
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.client = params['client']|| "";
       this.name = params['name'] || "";
@@ -24,30 +24,35 @@ export class PasswordSecurityComponent {
     setLocalStorage(this.client, this.name);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-pw-security-audio') as HTMLAudioElement;
-    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-    this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security.mp3`;
-      }, false);
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.audio!.src = `${globalVariables.bucketUrlPrefix}password_security/audio/password_security.mp3`;
-      }, false);
-    this.http.get<any>(`${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/password_security.json`)
-    .subscribe({
-      next: (data) => {handleData(data)},
-      error: err => {
-        this.http.get<any>(`${globalVariables.bucketUrlPrefix}password_security/password_security.json`)
-        .subscribe({
-          next: (data) => {handleData(data)},
-          error: error => {
-            this.router.navigate(['/page-not-found']);
-          }
-        });
+    let audioFile: Blob;
+    try {
+      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`);
+    } catch (error) {
+      try {
+        audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/audio/password_security.mp3`);
+      } catch (error) {
+        try {
+          audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}password_security/audio/password_security.mp3`);
+        } catch (error) {
+          this.router.navigate(['/page-not-found']);
+        }
       }
-    });
+    }
+    this.audio.src = URL.createObjectURL(audioFile!);
+    let json: Blob;
+    try {
+      json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}password_security/password_security.json`);
+      handleData(JSON.parse(await json.text()));
+    } catch (error) {
+      try {
+        json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}password_security/password_security.json`);
+        handleData(JSON.parse(await json.text()));
+      } catch (error) {
+        this.router.navigate(['/page-not-found']);
+      }
+    }
   }
 
   // Play/pause the animations and set the audio's current time to animations
