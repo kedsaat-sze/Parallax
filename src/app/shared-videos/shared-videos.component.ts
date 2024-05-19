@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, inject } from '@angular/core';
 import { globalVariables } from "../common/global_variables";
 import { ActivatedRoute } from "@angular/router";
-import { AnimationPlayer, asyncHandleData, handleData } from "../common/create-animation.function";
+import { AnimationPlayer, handleData } from "../common/create-animation.function";
 import { Observable } from "rxjs";
 import { MyComment, SharedDataService } from "../common/shared-data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -65,7 +65,7 @@ export class SharedVideosComponent {
     );
     try {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`);
-      this.animationPlayers = await asyncHandleData(JSON.parse(await json.text()), this.sharedDataService);
+      this.animationPlayers = handleData(JSON.parse(await json.text()));
     } catch (error) {
       this.header = "Error while loading data";
     }
