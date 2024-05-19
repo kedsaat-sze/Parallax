@@ -29,13 +29,13 @@ export class MobileDeviceSecurityComponent implements OnInit {
     this.audio = document.getElementById('my-mobile-device-security-audio') as HTMLAudioElement;
     let audioFile: Blob;
     try {
-      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`);
+      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`);
     } catch (error) {
       try {
-        audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`);
+        audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`);
       } catch (error) {
         try {
-          audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}mobile_device_security/audio/mobile-device-security.mp3`);
+          audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}mobile_device_security/audio/mobile-device-security.mp3`);
         } catch (error) {
           this.router.navigate(['/page-not-found']);
         }
@@ -43,11 +43,11 @@ export class MobileDeviceSecurityComponent implements OnInit {
     }
     let json: Blob;
     try {
-      json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`);
+      json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`);
       handleData(JSON.parse(await json.text()));
     } catch (error) {
       try {
-        json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}mobile_device_security/mobile_device_security.json`);
+        json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}mobile_device_security/mobile_device_security.json`);
         handleData(JSON.parse(await json.text()));
       } catch (error) {
         this.router.navigate(['/page-not-found']);

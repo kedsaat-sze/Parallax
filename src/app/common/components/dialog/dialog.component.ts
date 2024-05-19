@@ -28,15 +28,14 @@ export class DialogComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.audio = document.getElementById('my-dialog-audio') as HTMLAudioElement;
-    const audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.dialogData.emailAddress}/vid_${this.dialogData.videoName}/${this.dialogData.audioName}`);
-    this.audio.src = URL.createObjectURL(audioFile);
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.dialogData.header = "Error while loading data";
-      }, false
-    );
     try {
-      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.dialogData.emailAddress}/vid_${this.dialogData.videoName}/${this.dialogData.videoName}.json`);
+      const audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${this.dialogData.audioName}`);
+      this.audio.src = URL.createObjectURL(audioFile);
+    } catch (error) {
+      this.dialogData.header = "Error while loading data";
+    }
+    try {
+      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${this.dialogData.videoName}.json`);
       handleData(JSON.parse(await json.text()));
     } catch (error) {
       this.dialogData.header = "Error while loading data";
