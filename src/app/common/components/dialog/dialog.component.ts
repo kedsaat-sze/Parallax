@@ -35,7 +35,7 @@ export class DialogComponent implements OnInit {
       this.dialogData.header = "Error while loading data";
     }
     try {
-      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${this.dialogData.videoName}.json`);
+      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.dialogData.emailAddress}/vid_${this.dialogData.videoName}/${this.dialogData.videoName}.json`);
       handleData(JSON.parse(await json.text()));
     } catch (error) {
       this.dialogData.header = "Error while loading data";

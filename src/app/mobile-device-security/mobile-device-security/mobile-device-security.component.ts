@@ -44,11 +44,11 @@ export class MobileDeviceSecurityComponent implements OnInit {
     let json: Blob;
     try {
       json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`);
-      handleData(JSON.parse(await json.text()));
+      handleData(JSON.parse(await json.text()), true);
     } catch (error) {
       try {
         json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrlPrefix}mobile_device_security/mobile_device_security.json`);
-        handleData(JSON.parse(await json.text()));
+        handleData(JSON.parse(await json.text()), true);
       } catch (error) {
         this.router.navigate(['/page-not-found']);
       }
