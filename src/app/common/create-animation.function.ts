@@ -87,7 +87,14 @@ export function createImage( scene: Scene, id: string, picture: Picture): Animat
     };
     let transformation: Keyframe[] = [];
     transform.forEach((item) => {
-        if (item.transform.length > 0) {
+        transformation.push({
+            transform: item.transform.length > 0 ? item.transform : "",
+            scale: item.scale,
+            translate: `${item.position.x}px ${item.position.y}px`,
+            opacity: item.opacity,
+            offset: item.percent === 0 ? 0 : item.percent/100
+            });
+        /*if (item.transform.length > 0) {
             transformation.push({
             transform: item.transform,
             scale: item.scale,
@@ -102,7 +109,7 @@ export function createImage( scene: Scene, id: string, picture: Picture): Animat
             translate: `${item.position.x}px ${item.position.y}px`,
             offset: item.percent === 0 ? 0 : item.percent/100
             });
-        }
+        }*/
     });
     const animation = new KeyframeEffect(document.getElementById(`${scene.name}-${id}`),transformation, animationOptions);
     const animationPlayer = new Animation(animation);

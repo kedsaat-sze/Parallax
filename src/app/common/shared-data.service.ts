@@ -75,6 +75,6 @@ export class SharedDataService {
 
   getComments(path: string) {
     const recentMessagesQuery =  query(collection(this.firestore, path), orderBy("timestamp","desc"), limit(100));
-    return  collectionData(recentMessagesQuery) as  Observable<{}[]>
+    return  collectionData(recentMessagesQuery) as  Observable<MyComment[]>
   }
 }

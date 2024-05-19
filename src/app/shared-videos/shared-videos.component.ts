@@ -51,7 +51,7 @@ export class SharedVideosComponent {
       }
     });
     this.sharedData$ = this.sharedDataService.getCollectionData(`sharedvideos/${this.header}/ratings`) as  Observable<{userId: string, rating: number, id: string}[]>;
-    this.sharedComments$ = this.sharedDataService.getComments(`sharedvideos/${this.header}/comments`) as  Observable<{}[]>;
+    this.sharedComments$ = this.sharedDataService.getComments(`sharedvideos/${this.header}/comments`) as  Observable<MyComment[]>;
   }
 
   async ngOnInit(): Promise<void> {
@@ -69,18 +69,6 @@ export class SharedVideosComponent {
     } catch (error) {
       this.header = "Error while loading data";
     }
-    /*this.audio.src = `${globalVariables.bucketUrlPrefix}users/${this.emailAddress}/vid_${this.videoName}/${this.audioName}`;
-    this.audio.addEventListener('error', (event)=> {
-      event.preventDefault();
-      this.header = "Error while loading data";
-      }, false);
-    this.http.get<any>(`${globalVariables.bucketUrlPrefix}users/${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`)
-    .subscribe({
-      next: (data) => {this.animationPlayers = handleData(data)},
-      error: err => {
-        this.header = "Error while loading data";
-      }
-    });*/
   }
 
   // Play/pause the animations and set the audio's current time to animations
@@ -168,7 +156,6 @@ export class SharedVideosComponent {
       timestamp: new Date().toISOString()
     }
     await this.sharedDataService.addComment(`sharedvideos/${this.header}/comments`, comment);
-    //this.sharedDataService.firestore.collection(`sharedvideos/${this.header}/comments`).add(comment);
     this.comment = "";
   }
 }
