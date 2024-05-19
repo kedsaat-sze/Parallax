@@ -85,7 +85,7 @@ export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
     return animationPlayers;
 }
 
-export async function asyncHandleData(data: Movie, nameOption?: boolean): Promise<AnimationPlayer[]> {
+export async function asyncHandleData(data: Movie, service?: SharedDataService, nameOption?: boolean): Promise<AnimationPlayer[]> {
     let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach(async (scene: Scene) => {
@@ -127,7 +127,7 @@ export async function createImage( scene: Scene, id: string): Promise<AnimationP
     const transform: Transform[] = scene.description.background!.transform;
     const fromTime: number = scene.from_time;
     const animationTime: number = scene.animation_time;
-    const sharedDataService = inject(SharedDataService);
+    const sharedDataService = new SharedDataService;
     //let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     const imageElement = document.getElementById(`${scene.name}-${id}`) as HTMLImageElement;
