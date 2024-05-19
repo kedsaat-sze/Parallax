@@ -49,8 +49,13 @@ export class MyVideosComponent implements OnInit {
 
   async videoSubmit(form: NgForm) {
     let file: File = new File([this.JSONFile], `${form.value.name}.json`, {type: "application/json"});
-    const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${form.value.name}/`;
-    await this.sharedDataService.createAnimation(objectPaths,file, this.selectedFile!);
+    if (!this.modifyMode) {
+      const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${form.value.name}/`;
+      await this.sharedDataService.createAnimation(objectPaths,file, this.selectedFile!);
+    } else {
+      const objectPaths = `${globalVariables.gsBucketUrl}${this.email}/vid_${this.selectedVideo!.name}/`;
+      await this.sharedDataService.updateJson(`${objectPaths}${this.selectedVideo!.name}.json`, file);
+    }
     this.resetForm(form);
     this.getVideos();
   }
@@ -78,8 +83,7 @@ export class MyVideosComponent implements OnInit {
     this.selectedVideo = element;
     try {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.email}/vid_${element.name}/${element.name}.json`);
-        this.JSONFile = JSON.stringify(json, null, 4);
-        //JSON.parse(await json.text());
+      this.JSONFile = JSON.stringify(JSON.parse(await json.text()), null, 4);
     } catch (error) {
       console.log("Error occured while fetching data: " + error);
     }
@@ -112,6 +116,9 @@ export class MyVideosComponent implements OnInit {
 
   resetForm(form: NgForm) {
     this.selectedFile = undefined;
+    this.modifyMode = false;
+    this.JSONFile = "";
+    this.selectedVideo = undefined;
     form.resetForm();
     this.loadDefaultJSON();
   }

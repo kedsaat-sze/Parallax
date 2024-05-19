@@ -92,7 +92,7 @@
         </form>
         <mat-card-actions>
             <button class="btn-primary" (click)="videoSubmit(myVideoForm)"
-            [disabled]="myVideoForm.invalid">Submit</button>
+            [disabled]="myVideoForm.invalid || (modifyMode && json.invalid)">Submit</button>
             <button class="btn btn-primary" type="button" (click)="resetForm(myVideoForm)">Cancel</button>
         </mat-card-actions>
 </mat-card>
