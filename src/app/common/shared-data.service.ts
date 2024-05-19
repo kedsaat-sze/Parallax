@@ -60,6 +60,7 @@ export class SharedDataService {
   }
 
   async getAnimationFile(FileFullPath: string): Promise<Blob> {
+    console.log(FileFullPath);
     const fileRef = ref(this.storage, `${FileFullPath}`);
     const file = await getBlob(fileRef);
     return file;
