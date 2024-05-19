@@ -17,7 +17,7 @@ export interface IDialogData {
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  animationPlayers: AnimationPlayer[] = [];
+
   audio: HTMLAudioElement | undefined;
 
   constructor(

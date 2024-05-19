@@ -12,7 +12,7 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class MobileDeviceSecurityGermanComponent {
   name: string = "";
-  animationPlayers: AnimationPlayer[] = [];
+
   audioSrc: string = "";
   audio: HTMLAudioElement | undefined;
   client = "";

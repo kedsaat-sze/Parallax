@@ -12,7 +12,7 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class PasswordAndAuthenticationComponent {
   name: string = "";
-  animationPlayers: AnimationPlayer[] = [];
+
   audio: HTMLAudioElement | undefined;
   client = "";
 

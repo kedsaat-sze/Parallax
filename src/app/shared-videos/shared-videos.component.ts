@@ -17,7 +17,6 @@ export class SharedVideosComponent {
   videoName: string = "";
   emailAddress: string = "";
   audioName: string = "";
-  //animationPlayers: AnimationPlayer[] = [];
   audio: HTMLAudioElement | undefined;
   header: string = "";
   rating: number = 0;

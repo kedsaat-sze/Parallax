@@ -12,7 +12,7 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class PhishingComponent implements OnInit {
   name: string = "";
-  animationPlayers: AnimationPlayer[] = [];
+
   audio: HTMLAudioElement | undefined;
   client = "";
 
