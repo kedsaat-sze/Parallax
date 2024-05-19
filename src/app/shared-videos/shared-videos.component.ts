@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, inject } from '@angular/core';
 import { globalVariables } from "../common/global_variables";
 import { ActivatedRoute } from "@angular/router";
@@ -37,7 +36,6 @@ export class SharedVideosComponent {
   get myEmail() { return SharedDataService.email; }
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
   ) {

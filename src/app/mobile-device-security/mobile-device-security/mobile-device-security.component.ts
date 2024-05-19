@@ -1,9 +1,9 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { globalVariables } from "../../common/global_variables";
 import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
+import { SharedDataService } from "src/app/common/shared-data.service";
 
 @Component({
   selector: 'app-mobile-device-security',
@@ -12,11 +12,11 @@ import { setLocalStorage } from "../../common/set-local-storage.function";
 })
 export class MobileDeviceSecurityComponent implements OnInit {
   name: string = "";
-
   audio: HTMLAudioElement | undefined;
   client = "";
+  sharedDataService = inject(SharedDataService);
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.client = params['client']|| "";
       this.name = params['name'] || "";
@@ -26,13 +26,34 @@ export class MobileDeviceSecurityComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.route.queryParams
-    .subscribe(params => {
-      this.client = params["client"] || "";
-      this.name = params["name"] || "";
-    });
     this.audio = document.getElementById('my-mobile-device-security-audio') as HTMLAudioElement;
-    this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
+    let audioFile: Blob;
+    try {
+      audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`);
+    } catch (error) {
+      try {
+        audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`);
+      } catch (error) {
+        try {
+          audioFile = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}mobile_device_security/audio/mobile-device-security.mp3`);
+        } catch (error) {
+          this.router.navigate(['/page-not-found']);
+        }
+      }
+    }
+    let json: Blob;
+    try {
+      json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/mobile_device_security.json`);
+      handleData(JSON.parse(await json.text()));
+    } catch (error) {
+      try {
+        json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}mobile_device_security/mobile_device_security.json`);
+        handleData(JSON.parse(await json.text()));
+      } catch (error) {
+        this.router.navigate(['/page-not-found']);
+      }
+    }
+    /*this.audio.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security${localStorage.getItem("name") ? "-" + localStorage.getItem("name") : ""}.mp3`;
     this.audio.addEventListener('error', (event)=> {
       event.preventDefault();
     this.audio!.src = `${globalVariables.bucketUrlPrefix}${localStorage.getItem("client") ? localStorage.getItem("client") + "/" : ""}mobile_device_security/audio/mobile-device-security.mp3`;
@@ -53,7 +74,7 @@ export class MobileDeviceSecurityComponent implements OnInit {
           }
         });
       }
-    });
+    });*/
   }
 
   // Play/pause the animations and set the audio's current time to animations
