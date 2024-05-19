@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { HttpClient } from "@angular/common/http";
 import { globalVariables } from "../../global_variables";
-import { AnimationPlayer, handleData } from "../../create-animation.function";
+import { handleData } from "../../create-animation.function";
 
 export interface IDialogData {
   header?: string;

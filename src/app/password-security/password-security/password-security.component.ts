@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from '@angular/core';
 import { globalVariables } from "../../common/global_variables";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AnimationPlayer, handleData } from "../../common/create-animation.function";
+import { handleData } from "../../common/create-animation.function";
 import { setLocalStorage } from "../../common/set-local-storage.function";
 
 @Component({
