@@ -29,6 +29,7 @@ export class MyVideosComponent implements OnInit {
   JSONFile = "";
   selectedFile: File | undefined;
   selectedVideo: Video | undefined;
+  modifyMode = false;
   get email() { return SharedDataService.email; }
   sharedDataService = inject(SharedDataService);
 
@@ -40,7 +41,7 @@ export class MyVideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayedColumns = ["name", "play", "copy", "delete"];
+    this.displayedColumns = ["name", "play", "copy", "modify", "delete"];
     this.getVideos();
     this.loadDefaultJSON();
   }
@@ -70,6 +71,26 @@ export class MyVideosComponent implements OnInit {
         localStorage.getItem("useremail") || undefined
       )
     );
+  }
+
+  async onModify(element: Video) {
+    this.modifyMode = true;
+    this.selectedVideo = element;
+    try {
+      const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.email}/vid_${element.name}/${element.name}.json`);
+        this.JSONFile = JSON.stringify(json, null, 4);
+        //JSON.parse(await json.text());
+    } catch (error) {
+      console.log("Error occured while fetching data: " + error);
+    }
+    this.http.get(`${globalVariables.bucketObjectPrefix}${element.json}`).subscribe({
+      next: (data) => {
+        this.JSONFile = JSON.stringify(data, null, 4);
+      },
+      error: (err) => {
+        console.log("Error occured while fetching data: " + err.message);
+      }
+    });
   }
 
   onDelete(element: Video) {
@@ -107,11 +128,11 @@ export class MyVideosComponent implements OnInit {
 
   getVideos() {
     let tempData: Video[] =[];
-    this.http.get<any>(`${globalVariables.bucketObjectPrefix}?prefix=users/${localStorage.getItem("useremail")}/vid`)
+    this.http.get<any>(`${globalVariables.bucketObjectPrefix}?prefix=users/${this.email}/vid`)
     .subscribe({
       next: (data) => {
         Promise.all(data.items.map((item: any) => {
-          const videoName = item.name.split(`users/${localStorage.getItem("useremail")}/vid_`)[1].split("/")[0];
+          const videoName = item.name.split(`users/${this.email}/vid_`)[1].split("/")[0];
           const found = tempData.find((element) => {
             return element.name === videoName;
           });

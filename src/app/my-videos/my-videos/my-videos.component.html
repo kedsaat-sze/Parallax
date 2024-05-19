@@ -32,6 +32,20 @@
                 </div>
             </td>
         </ng-container>
+        <ng-container matColumnDef="modify">
+            <th mat-header-cell *matHeaderCellDef class="action-cell"> Modify </th>
+            <td mat-cell class="action-cell" *matCellDef="let element">
+                <div class="example-button-container">
+                    <button mat-mini-fab (click)="onModify(element)">
+                        <mat-icon matTooltip="Modify animation">
+                            <span class="material-symbols-outlined">
+                                modify
+                            </span>
+                        </mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef class="action-cell"> Delete </th>
             <td mat-cell class="action-cell" *matCellDef="let element">
@@ -54,14 +68,14 @@
 <mat-card style="margin: 1rem 0rem; padding: 1rem; top: 0 !important;">
     <!--Create/Modify video-->
     <form class="my-video-form" (ngSubmit)="videoSubmit(myVideoForm)" #myVideoForm="ngForm">
-        <mat-form-field class="mat-form-field" appearance="outline">
+        <mat-form-field [ariaDisabled]="modifyMode" class="mat-form-field" appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput type="text" [ngModel]="" id="name" name="name"
             required autocomplete="off" placeholder="Name" #name="ngModel">
             <mat-error *ngIf="name.hasError('required')">Required to fill!</mat-error>
         </mat-form-field>
         <br>
-        <div class="mat-form-field" appearance="outline">
+        <div class="mat-form-field" [ariaDisabled]="modifyMode" appearance="outline">
             <mat-label *ngIf="selectedFile == undefined || selectedFile == null">Upload new audio file</mat-label>
             <span class="file-name">{{selectedFile?.name}}</span>
             <button type="button" mat-raised-button (click)="file.click()">Choose File</button>
