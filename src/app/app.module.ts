@@ -13,7 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { StarRatingModule } from "angular-star-rating";
 import { SharedVideosComponent } from "./shared-videos/shared-videos.component";
-import { initializeApp  } from "firebase/app";
+import { initializeApp, FirebaseOptions  } from "firebase/app";
 import { environment } from "src/environments/environment";
 import { getAuth, connectAuthEmulator, provideAuth } from "@angular/fire/auth";
 import { provideFirebaseApp } from "@angular/fire/app";
@@ -43,7 +43,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatInputModule,
     MatSnackBarModule,
     StarRatingModule.forRoot(),
-    provideFirebaseApp(() =>  initializeApp(environment)),
+    provideFirebaseApp(() =>  initializeApp(process.env["FIREBASE_DETAILS"] as FirebaseOptions)),
     provideAuth(() => {
       const  auth = getAuth();
       if (location.hostname === 'localhost') {

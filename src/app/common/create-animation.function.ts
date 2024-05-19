@@ -85,11 +85,11 @@ export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
     return animationPlayers;
 }
 
-export async function asyncHandleData(data: Movie, service?: SharedDataService, nameOption?: boolean): Promise<AnimationPlayer[]> {
+export async function asyncHandleData(data: Movie, service: SharedDataService, nameOption?: boolean): Promise<AnimationPlayer[]> {
     let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach(async (scene: Scene) => {
-            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background")) :
+            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background", service)) :
                 console.log(`${scene}'s background is null`);
             let screenResource = "";
             if (scene.description.screen !== null) {
@@ -99,39 +99,39 @@ export async function asyncHandleData(data: Movie, service?: SharedDataService, 
                     `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` +
                     scene.description.screen.resource.substring(position);
             }
-            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen")) :
+            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen", service)) :
                 console.log(`${scene}'s screen is null`);
-            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground")) :
+            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground", service)) :
                 console.log(`${scene}'s midground is null`);
-            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground")) :
+            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground", service)) :
                 console.log(`${scene}'s foreground is null`);
         });
     } else {
         data.movie.forEach(async (scene: Scene) => {
-            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background")) :
+            scene.description.background != null ? animationPlayers.push(await createImage(scene, "background", service)) :
                 console.log(`${scene}'s background is null`);
-            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen")) :
+            scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen", service)) :
                 console.log(`${scene}'s screen is null`);
-            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground")) :
+            scene.description.midground != null ? animationPlayers.push(await createImage(scene, "midground", service)) :
                 console.log(`${scene}'s midground is null`);
-            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground")) :
+            scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground", service)) :
                 console.log(`${scene}'s foreground is null`);
         });
     }
     return animationPlayers;
 }
 
-export async function createImage( scene: Scene, id: string): Promise<AnimationPlayer> {
+export async function createImage( scene: Scene, id: string, sharedDataService?: SharedDataService): Promise<AnimationPlayer> {
     //https://storage.googleapis.com/sbox-parallax/phishing/imgs/phishing_email.png
     const resource: string = scene.description.background!.resource.replace(globalVariables.bucketUrlPrefix, globalVariables.gsBucketUrlPrefix);
     const transform: Transform[] = scene.description.background!.transform;
     const fromTime: number = scene.from_time;
     const animationTime: number = scene.animation_time;
-    const sharedDataService = new SharedDataService;
+    //const sharedDataService = new SharedDataService;
     //let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     const imageElement = document.getElementById(`${scene.name}-${id}`) as HTMLImageElement;
-    const imageFile = await sharedDataService.getAnimationFile(resource);
+    const imageFile = await sharedDataService!.getAnimationFile(resource);
     imageElement.src = URL.createObjectURL(imageFile);
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);

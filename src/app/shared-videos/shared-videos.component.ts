@@ -65,7 +65,7 @@ export class SharedVideosComponent {
     );
     try {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.emailAddress}/vid_${this.videoName}/${this.videoName}.json`);
-      this.animationPlayers = await asyncHandleData(JSON.parse(await json.text()));
+      this.animationPlayers = await asyncHandleData(JSON.parse(await json.text()), this.sharedDataService);
     } catch (error) {
       this.header = "Error while loading data";
     }
