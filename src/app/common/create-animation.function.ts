@@ -88,7 +88,7 @@ export function handleData(data: any, nameOption?: boolean): AnimationPlayer[] {
 export async function asyncHandleData(data: Movie, service: SharedDataService, nameOption?: boolean): Promise<AnimationPlayer[]> {
     let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
-        data.movie.forEach(async (scene: Scene) => {
+        await Promise.all(data.movie.map(async (scene: Scene) => {
             scene.description.background != null ? animationPlayers.push(await createImage(scene, "background", service)) :
                 console.log(`${scene}'s background is null`);
             let screenResource = "";
@@ -105,9 +105,9 @@ export async function asyncHandleData(data: Movie, service: SharedDataService, n
                 console.log(`${scene}'s midground is null`);
             scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground", service)) :
                 console.log(`${scene}'s foreground is null`);
-        });
+        }));
     } else {
-        data.movie.forEach(async (scene: Scene) => {
+        await Promise.all(data.movie.map(async (scene: Scene) => {
             scene.description.background != null ? animationPlayers.push(await createImage(scene, "background", service)) :
                 console.log(`${scene}'s background is null`);
             scene.description.screen != null ? animationPlayers.push(await createImage(scene, "screen", service)) :
@@ -116,7 +116,7 @@ export async function asyncHandleData(data: Movie, service: SharedDataService, n
                 console.log(`${scene}'s midground is null`);
             scene.description.foreground != null ? animationPlayers.push(await createImage(scene, "foreground", service)) :
                 console.log(`${scene}'s foreground is null`);
-        });
+        }));
     }
     return animationPlayers;
 }
@@ -127,13 +127,13 @@ export async function createImage( scene: Scene, id: string, sharedDataService?:
     const transform: Transform[] = scene.description.background!.transform;
     const fromTime: number = scene.from_time;
     const animationTime: number = scene.animation_time;
+    const imageFile = await sharedDataService!.getAnimationFile(resource);
     //let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
-    let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
+    let imageTag = `<img id=\"${scene.name}-${id}\" [src]=\"imageFile\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);
     const imageElement = document.getElementById(`${scene.name}-${id}`) as HTMLImageElement;
-    const imageFile = await sharedDataService!.getAnimationFile(resource);
-    imageElement.src = URL.createObjectURL(imageFile);
+    //imageElement.src = URL.createObjectURL(imageFile);
     const animationOptions: KeyframeEffectOptions = {
         duration: animationTime*1000,
         fill: "both",
