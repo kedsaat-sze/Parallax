@@ -128,8 +128,9 @@ export async function createImage( scene: Scene, id: string, sharedDataService?:
     const fromTime: number = scene.from_time;
     const animationTime: number = scene.animation_time;
     const imageFile = await sharedDataService!.getAnimationFile(resource);
+    const imageUrl = URL.createObjectURL(imageFile);
     //let imageTag = `<img id=\"${scene}-${id}\" class=\"animated-image\" src=\"${resource}\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
-    let imageTag = `<img id=\"${scene.name}-${id}\" [src]=\"imageFile\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
+    let imageTag = `<img id=\"${scene.name}-${id}\" src=\"${imageUrl}\" class=\"animated-image\" width=\"1200\" height=\"675\" alt=\"${id}\" />`;
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);
     const imageElement = document.getElementById(`${scene.name}-${id}`) as HTMLImageElement;
