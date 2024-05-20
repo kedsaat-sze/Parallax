@@ -39,7 +39,6 @@ export interface Picture {
 }
 
 export function handleData(data: Movie, nameOption?: boolean) {
-    //let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach((scene: Scene) => {
             scene.description.background != null ?
@@ -72,7 +71,7 @@ export function handleData(data: Movie, nameOption?: boolean) {
     }
 }
 
-export function createImage( scene: Scene, id: string, picture: Picture): AnimationPlayer {
+export function createImage( scene: Scene, id: string, picture: Picture) {
     let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" src=\"${picture.resource}\" width=\"1200\" height=\"675\" alt=\"${scene.name}-${id}\" />`;
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);
@@ -96,5 +95,5 @@ export function createImage( scene: Scene, id: string, picture: Picture): Animat
     const animationPlayer = new Animation(animation);
     animationPlayer.play();
     animationPlayer.pause();
-    return {animationPlayer: animationPlayer, elementId: `${scene.name}-${id}`};
+    return;
 }
