@@ -39,11 +39,11 @@ export interface Picture {
 }
 
 export function handleData(data: Movie, nameOption?: boolean) {
-    let animationPlayers: AnimationPlayer[] = [];
+    //let animationPlayers: AnimationPlayer[] = [];
     if (nameOption) {
         data.movie.forEach((scene: Scene) => {
             scene.description.background != null ?
-                animationPlayers.push(createImage(scene, "background", scene.description.background)) : console.log(`${scene.name}'s background is null`);
+                createImage(scene, "background", scene.description.background) : console.log(`${scene.name}'s background is null`);
             if (scene.description.screen !== null) {
                 let screenResource = "";
                 let position = scene.description.screen.resource.indexOf(".png");
@@ -52,22 +52,22 @@ export function handleData(data: Movie, nameOption?: boolean) {
                 scene.description.screen.resource = screenResource;
             }
             scene.description.screen != null ?
-                animationPlayers.push(createImage(scene, "screen", scene.description.screen)) : console.log(`${scene.name}'s screen is null`);
+                createImage(scene, "screen", scene.description.screen) : console.log(`${scene.name}'s screen is null`);
             scene.description.midground != null ?
-                animationPlayers.push(createImage(scene, "midground", scene.description.midground)) : console.log(`${scene.name}'s midground is null`);
+                createImage(scene, "midground", scene.description.midground) : console.log(`${scene.name}'s midground is null`);
             scene.description.foreground != null ?
-                animationPlayers.push(createImage(scene, "foreground", scene.description.foreground)) : console.log(`${scene.name}'s foreground is null`);
+                createImage(scene, "foreground", scene.description.foreground) : console.log(`${scene.name}'s foreground is null`);
         });
     } else {
         data.movie.forEach((scene: Scene) => {
             scene.description.background != null ?
-                animationPlayers.push(createImage(scene, "background", scene.description.background)) : console.log(`${scene.name}'s background is null`);
+                createImage(scene, "background", scene.description.background) : console.log(`${scene.name}'s background is null`);
             scene.description.screen != null ?
-                animationPlayers.push(createImage(scene, "screen", scene.description.screen)) : console.log(`${scene.name}'s screen is null`);
+                createImage(scene, "screen", scene.description.screen) : console.log(`${scene.name}'s screen is null`);
             scene.description.midground != null ?
-                animationPlayers.push(createImage(scene, "midground", scene.description.midground)) : console.log(`${scene.name}'s midground is null`);
+                createImage(scene, "midground", scene.description.midground) : console.log(`${scene.name}'s midground is null`);
             scene.description.foreground != null ?
-                animationPlayers.push(createImage(scene, "foreground", scene.description.foreground)) : console.log(`${scene.name}'s foreground is null`);
+                createImage(scene, "foreground", scene.description.foreground) : console.log(`${scene.name}'s foreground is null`);
         });
     }
 }
