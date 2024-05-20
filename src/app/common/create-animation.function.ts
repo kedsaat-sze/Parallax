@@ -73,7 +73,8 @@ export function handleData(data: Movie, nameOption?: boolean) {
 }
 
 export function createImage( scene: Scene, id: string, picture: Picture) {
-    let imageTag = `<img id=\"${scene.name}-${id}\" class=\"animated-image\" src=\"${picture.resource}\" width=\"1200\" height=\"675\" alt=\"${scene.name}-${id}\" />`;
+    let imageTag =
+    `<img id=\"${scene.name}-${id}\" class=\"animated-image\" src=\"${picture.resource}\" width=\"1200\" height=\"675\" alt=\"${scene.name}-${id}\" />`;
     var container = document.getElementById("container");
     container!.insertAdjacentHTML('beforeend',imageTag);
     const animationOptions: KeyframeEffectOptions = {
@@ -93,8 +94,6 @@ export function createImage( scene: Scene, id: string, picture: Picture) {
         });
     });
     const animation = new KeyframeEffect(document.getElementById(`${scene.name}-${id}`),transformation, animationOptions);
-    const animationPlayer = new Animation(animation);
-    animationPlayer.play();
-    animationPlayer.pause();
+    new Animation(animation);
     return;
 }
