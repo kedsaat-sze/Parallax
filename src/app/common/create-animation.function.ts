@@ -47,8 +47,8 @@ export function handleData(data: Movie, nameOption?: boolean) {
             if (scene.description.screen !== null) {
                 let screenResource = "";
                 let position = scene.description.screen.resource.indexOf(".png");
-                screenResource = scene.description.screen.resource.substring(0, position) + `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` +
-                scene.description.screen.resource.substring(position);
+                screenResource = scene.description.screen.resource.substring(0, position) +
+                    `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` + scene.description.screen.resource.substring(position);
                 scene.description.screen.resource = screenResource;
             }
             scene.description.screen != null ?

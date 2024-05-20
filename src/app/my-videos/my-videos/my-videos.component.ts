@@ -85,7 +85,7 @@ export class MyVideosComponent implements OnInit {
       const json = await this.sharedDataService.getAnimationFile(`${globalVariables.gsBucketUrl}${this.email}/vid_${element.name}/${element.name}.json`);
       this.JSONFile = JSON.stringify(JSON.parse(await json.text()), null, 4);
     } catch (error) {
-      console.log("Error occured while fetching data: " + error);
+      this._snackBar.open("Error occured while fetching data!");
     }
   }
 
@@ -99,7 +99,7 @@ export class MyVideosComponent implements OnInit {
     if (this.JSONFile) {
       try { JSON.parse(this.JSONFile) } catch { this.isValidJSON = false }
       if (!this.isValidJSON) {
-        console.log("Invalid JSON");
+        this._snackBar.open("Invalid JSON");
       } else {
         this.JSONFile = JSON.stringify(JSON.parse(this.JSONFile), null, 4);
       }
@@ -149,7 +149,7 @@ export class MyVideosComponent implements OnInit {
         }));
       },
       error: (err) => {
-        console.log("Error occured while fetching data: " + err.message);
+        this._snackBar.open("Error occured while fetching data!");
       }
     });
   }
