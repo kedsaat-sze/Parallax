@@ -94,6 +94,8 @@ export function createImage( scene: Scene, id: string, picture: Picture) {
         });
     });
     const animation = new KeyframeEffect(document.getElementById(`${scene.name}-${id}`),transformation, animationOptions);
-    new Animation(animation);
+    const animationPlayer = new Animation(animation);
+    animationPlayer.play();
+    animationPlayer.pause();
     return;
 }
