@@ -47,8 +47,9 @@ export function handleData(data: Movie, nameOption?: boolean) {
                 let screenResource = "";
                 let position = scene.description.screen.resource.indexOf(".png");
                 screenResource = scene.description.screen.resource.substring(0, position) +
-                    `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` + scene.description.screen.resource.substring(position);
-                scene.description.screen.resource = screenResource;
+                    `_${globalVariables.usedOs === "mac" ? globalVariables.usedOs : "windows"}` +
+                    scene.description.screen.resource.substring(position);
+                    scene.description.screen.resource = screenResource;
             }
             scene.description.screen != null ?
                 createImage(scene, "screen", scene.description.screen) : console.log(`${scene.name}'s screen is null`);
