@@ -127,7 +127,7 @@ export class MyVideosComponent implements OnInit {
 
   getVideos() {
     let tempData: Video[] =[];
-    this.http.get<any>(`${globalVariables.bucketObjectPrefix}?prefix=users/${this.email}/vid`)
+    this.http.get<any>(`${globalVariables.gsBucketUrlPrefix}users/${this.email}/vid**`)
     .subscribe({
       next: (data) => {
         Promise.all(data.items.map((item: any) => {
