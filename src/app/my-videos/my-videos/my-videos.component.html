@@ -68,14 +68,14 @@
 <mat-card style="margin: 1rem 0rem; padding: 1rem; top: 0 !important;">
     <!--Create/Modify video-->
     <form class="my-video-form" (ngSubmit)="videoSubmit(myVideoForm)" #myVideoForm="ngForm">
-        <mat-form-field [ariaDisabled]="modifyMode" class="mat-form-field" appearance="outline">
+        <mat-form-field class="mat-form-field" appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput type="text" [ngModel]="" id="name" name="name"
+            <input matInput type="text" [disabled]="modifyMode" [ngModel]="modifyMode ? selectedVideo!.name : ''" id="name" name="name"
             required autocomplete="off" placeholder="Name" #name="ngModel">
             <mat-error *ngIf="name.hasError('required')">Required to fill!</mat-error>
         </mat-form-field>
         <br>
-        <div class="mat-form-field" [ariaDisabled]="modifyMode" appearance="outline">
+        <div class="mat-form-field" [hidden]="modifyMode" appearance="outline">
             <mat-label *ngIf="selectedFile == undefined || selectedFile == null">Upload new audio file</mat-label>
             <span class="file-name">{{selectedFile?.name}}</span>
             <button type="button" mat-raised-button (click)="file.click()">Choose File</button>
@@ -92,7 +92,7 @@
         </form>
         <mat-card-actions>
             <button class="btn-primary" (click)="videoSubmit(myVideoForm)"
-            [disabled]="myVideoForm.invalid || (modifyMode && json.invalid)">Submit</button>
+            [disabled]="myVideoForm.invalid">Submit</button>
             <button class="btn btn-primary" type="button" (click)="resetForm(myVideoForm)">Cancel</button>
         </mat-card-actions>
 </mat-card>
